@@ -1,0 +1,2 @@
+class ColorIllust < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class DraftIllust < ApplicationRecord
+end

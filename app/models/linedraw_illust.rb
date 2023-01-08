@@ -1,0 +1,2 @@
+class LinedrawIllust < ApplicationRecord
+end
