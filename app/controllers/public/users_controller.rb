@@ -1,0 +1,39 @@
+class Public::UsersController < ApplicationController
+  def show
+    @user = User.find(params[:id])
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      # フラッシュメッセージを設定
+      flash[:notice] = "ユーザ情報は編集されました"
+      redirect_to user_path
+    else
+      flash[:notice] = "ユーザ情報を編集できませんでした"
+      redirect_to user_path
+    end
+  end
+
+  def favorites
+  end
+
+  def withdraw
+    @user = current_user
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
+  end
+
+  # Userのストロングパラメータ
+  private
+
+  def user_params
+    params.require(:user).permit(:email, :encrypted_password, :is_deleted, :username, :handlename, :profile_image)
+  end
+end

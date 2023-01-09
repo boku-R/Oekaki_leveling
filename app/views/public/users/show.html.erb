@@ -1,0 +1,17 @@
+<%= flash[:notice] %>
+
+<div class="h2">マイページです</div>
+
+<%= render "sidebar" %>
+
+<%#= image_tag @user.get_profile_image(100,100) %>
+  <% if @user.profile_image.attached? %>
+    <%= image_tag @user.profile_image, size: "100x100" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "100x100" %>
+  <% end %>
+
+<p>ユーザ名：<%= @user.username %></p>
+<p>ハンドルネーム：<%= @user.handlename %></p>
+<p>メールアドレス：<%= @user.email %></p>
+<p>レベル：<%= @user.level %></p>

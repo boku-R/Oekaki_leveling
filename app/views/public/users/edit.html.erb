@@ -1,0 +1,26 @@
+<%= flash[:notice] %>
+
+<div class="h2">会員情報編集画面です</div>
+
+<%= render "sidebar" %>
+
+<%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
+  <p>アイコン画像</p>
+  <%= f.file_field :profile_image, accept: "image/*" %>
+
+  <p>メールアドレス</p>
+  <%= f.text_field :email, size:"40" %>
+
+  <p>ユーザ名</p>
+  <%= f.text_field :username, size:"40" %>
+
+  <p>ハンドルネーム</p>
+  <%= f.text_field :handlename,size:"40" %>
+
+  <p>パスワード</p>
+  <%#= f.text_field :encrypted_password, size:"40" %>
+
+  <div class="col text-center">
+    <%= f.submit "　変更を保存　",class:"btn btn-success center-block"  %>
+  </div>
+<% end %>

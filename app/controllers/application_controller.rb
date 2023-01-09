@@ -10,5 +10,8 @@ class ApplicationController < ActionController::Base
 
     # ログイン登録（sign_in）の際に、データ操作を許可
     devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
+
+    # アカウント編集の時に諸々のストロングパラメータを追加
+    devise_parameter_sanitizer.permit(:account_update, keys: [:email, :encrypted_password, :is_deleted, :username, :handlename, :profile_image])
   end
 end

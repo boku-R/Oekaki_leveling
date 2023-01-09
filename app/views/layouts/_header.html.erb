@@ -7,7 +7,10 @@
     <span>ようこそ！<%= current_user.handlename %> さん</span>
       <ul class="nav justify-content-end">
         <li class="nav-item">
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          <%= link_to "マイページ", user_path(current_user.id), method: :get, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
       </ul>
 
@@ -18,6 +21,9 @@
       <!--＜サインインしていない場合＞-->
       <% else %>
       <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <%= link_to "About", about_path, class: "nav-link" %>
+        </li>
         <li class="nav-item">
           <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
         </li>
