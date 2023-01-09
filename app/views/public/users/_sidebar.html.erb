@@ -1,4 +1,6 @@
 <div class="h2">ユーザページのサイドバーです</div>
 
-<%= link_to "プロフィール表示", user_path(current_user.id), method: :get, class: "nav-link" %>
-<%= link_to "プロフィール編集", edit_user_path(current_user.id), method: :get, class: "nav-link" %>
+<%= link_to "プロフィール表示", user_path(user.id), method: :get, class: "nav-link" %>
+<%= link_to "プロフィール編集", edit_user_path(user.id), method: :get, class: "nav-link" %>
+<%= link_to "フォロー", user_followings_path(user.id), method: :get, class: "nav-link" %>
+<%= link_to "フォロワー", user_followers_path(user.id), method: :get, class: "nav-link" %>

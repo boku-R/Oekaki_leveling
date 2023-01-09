@@ -2,7 +2,8 @@
 
 <div class="h2">会員情報編集画面です</div>
 
-<%= render "sidebar" %>
+<%= render "topbar",user: @user %>
+<%= render "sidebar",user: @user %>
 
 <%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
   <p>アイコン画像</p>
