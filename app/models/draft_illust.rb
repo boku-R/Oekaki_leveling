@@ -1,2 +1,0 @@
-class DraftIllust < ApplicationRecord
-end

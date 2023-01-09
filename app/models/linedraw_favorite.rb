@@ -1,2 +1,0 @@
-class LinedrawFavorite < ApplicationRecord
-end

@@ -1,2 +1,0 @@
-class FinishIllust < ApplicationRecord
-end

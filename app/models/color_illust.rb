@@ -1,2 +1,0 @@
-class ColorIllust < ApplicationRecord
-end

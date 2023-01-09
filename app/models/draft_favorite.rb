@@ -1,2 +1,0 @@
-class DraftFavorite < ApplicationRecord
-end

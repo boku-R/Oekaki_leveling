@@ -1,2 +1,0 @@
-class LinedrawIllust < ApplicationRecord
-end
