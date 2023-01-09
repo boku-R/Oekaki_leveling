@@ -1,0 +1,31 @@
+<header>
+  <nav class="navbar navbar-light mb-2" style="background-color:silver">
+    <%= link_to "（ロゴが入る予定）", root_path, method: :get %>
+
+    <!--ユーザがサインインした場合-->
+    <% if user_signed_in? %>
+    <span>ようこそ！<%= current_user.handlename %> さん</span>
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        </li>
+      </ul>
+
+      <!--＜管理者がログインした場合＞-->
+      <% elsif admin_signed_in? %>
+
+
+      <!--＜サインインしていない場合＞-->
+      <% else %>
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログイン", user_session_path, class: "nav-link" %>
+        </li>
+      </ul>
+    <% end %>
+
+  </nav>
+</header>
