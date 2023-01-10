@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get 'about' => 'homes#about'
 
-    resources :posts, only: [:index, :show, :create, :edit, :update, :destroy] do
+    resources :posts, only: [:index, :show, :create, :edit, :update, :destroy, :new] do
       resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end

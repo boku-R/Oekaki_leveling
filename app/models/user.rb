@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
+  # いいねへの関連付け
+  has_many :favorites, dependent: :destroy
+
   # 下記フォロー機能
   # フォローをした、されたの関係を実装
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -11,7 +14,7 @@ class User < ApplicationRecord
   # 一覧画面で使うための実装
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
-  
+
   # 下記フォロー機能におけるメソッドの記述
   # フォローしたときの処理
   def follow(user_id)

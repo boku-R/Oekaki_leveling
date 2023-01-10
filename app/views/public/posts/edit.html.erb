@@ -1,0 +1,10 @@
+<% if @post.errors.any? %>
+  <p><%= @post.errors.count %>errors prohibited this obj from being saved:</p>
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2>投稿ページです</h2>

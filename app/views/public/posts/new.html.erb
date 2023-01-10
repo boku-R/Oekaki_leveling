@@ -1,0 +1,20 @@
+<h2>新規投稿</h2>
+
+<%= flash[:notice] %>
+
+
+<%= form_with model: @post, url: posts_path ,method: :post do |f| %>
+
+  <p>タイトル</p>
+  <%= f.text_field :title %>
+
+  <p>説明</p>
+  <%= f.text_area :introduction %>
+
+  <%= f.fields_for :illusts do |i| %>
+    <p>イラスト</p>
+    <%= i.file_field :illust_image, accept: "image/*" %>
+  <% end %>
+
+  <p><%= f.submit '投稿する',class:"btn btn-success" %></p>
+<% end %>
