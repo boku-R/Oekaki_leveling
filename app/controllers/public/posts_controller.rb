@@ -2,12 +2,16 @@ class Public::PostsController < ApplicationController
 
   def new
     @post = Post.new
+    # illust.stepに投入するための変数をここで準備
+    @illust_step = 1
     # ４つのイラスト投稿の箱を作る
-    4.times {@post.illusts.build}
+    4.times {
+      @post.illusts.build
+    }
   end
 
   def index
-    @post = Post.all
+    @posts = Post.all
   end
 
   def show
@@ -55,6 +59,5 @@ class Public::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title,:introduction,:user_id, illusts_attributes: [:post_id, :step, :illust_image])
   end
-
 
 end
