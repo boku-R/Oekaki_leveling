@@ -7,4 +7,23 @@
   </ul>
 <% end %>
 
-<h2>投稿ページです</h2>
+<h2>編集ページです</h2>
+
+<%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
+
+  <p>タイトル</p>
+  <%= f.text_field :title %>
+
+  <p>説明</p>
+  <%= f.text_area :introduction %>
+
+  <%= f.fields_for :illusts do |i| %>
+    <p>イラスト</p>
+    <%= i.file_field :illust_image, accept: "image/*" %>
+    <!--上から順に、イラストの種類(illust.step)をhidden_fieldで投入-->
+    <%= i.hidden_field :step, value: @illust_step %>
+    <% @illust_step = @illust_step + 1 %>
+  <% end %>
+
+  <p><%= f.submit '投稿する',class:"btn btn-success" %></p>
+<% end %>

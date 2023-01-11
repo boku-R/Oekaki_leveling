@@ -35,6 +35,8 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    # illust.stepに投入するための変数をここで準備
+    @illust_step = 1
   end
 
   def update
@@ -57,7 +59,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title,:introduction,:user_id, illusts_attributes: [:post_id, :step, :illust_image])
+    params.require(:post).permit(:title,:introduction,:user_id, illusts_attributes: [:id, :post_id, :step, :illust_image])
   end
 
 end

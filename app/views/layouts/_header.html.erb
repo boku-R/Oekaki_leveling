@@ -13,6 +13,9 @@
           <%= link_to "作品投稿", new_post_path, method: :get, class: "nav-link" %>
         </li>
         <li class="nav-item">
+          <%= link_to "作品一覧", posts_path, method: :get, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
       </ul>
