@@ -1,23 +1,28 @@
+<%= flash[:notice] %>
 <h2>作品の詳細ページです</h2>
 
-<%#= image_tag @user.get_profile_image(100,100) %>
+<!--投稿主のユーザを表示-->
+<%= image_tag @user.get_profile_image(100,100) %>
+<%= @user.handlename %>
 
+【タイトル：<%= @post.title %>】
+【説明：<%= @post.introduction %>】
 <table class = "table">
   <tbody>
-    <% @post.illusts.reverse_each do |illust| %>
+    <% @post.illusts.each do |illust| %>
       <tr>
         <th>
           <% if illust.illust_image.present? %>
             <%= link_to post_path(illust.post_id) do %>
               <!--リサイズ→真ん中を正方形にくり抜きます-->
-              <p><%= image_tag illust.illust_image.variant(resize: "150x150", gravity: "center", crop: "100x100+0+0") %></p>
+              <p><%= image_tag illust.illust_image.variant(resize: "150x150", gravity: "center", crop: "100x100+0+0").processed %></p>
             <% end %>
           <% else %>
             <%= image_tag 'no_image', size: "150x150" %>
           <% end %>
         </th>
         <th><%= illust.step %></th>
-        <th>いいね機能</th>
+        <th>いいね機能をここに追加予定</th>
       </tr>
     <% end %>
     <tr>

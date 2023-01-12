@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
   # ActiveStorageによるアイコン画像保存機能
   has_one_attached :profile_image
-
+  
   # プロフィール画像を取得するためのメソッド
   def get_profile_image(width,height)
     unless profile_image.attached?

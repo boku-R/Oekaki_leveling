@@ -16,6 +16,8 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    # 投稿主のユーザ
+    @user = User.find(@post.user_id)
   end
 
   def create
@@ -24,7 +26,7 @@ class Public::PostsController < ApplicationController
     if @post.save
       flash[:notice] = "投稿は保存されました"
       # 【済】books#showにリダイレクトしないといけない
-      redirect_to new_post_path
+      redirect_to post_path(@post.id)
       # redirect_to post_path(@post.id)
     else
       flash[:notice] = "投稿を保存できませんでした"
