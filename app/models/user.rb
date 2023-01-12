@@ -32,9 +32,12 @@ class User < ApplicationRecord
   # ユーザ名に一意性を持たせ、半角英数字のみ許可
   validates :username, uniqueness: true, format: { with: /\A[a-z0-9]+\z/i }
 
+  # ユーザのアイコン画像アップロードに対してのバリデーション(.jpg .jpeg .pngのみ許可)
+  validate :profile_image_type
+
   # ActiveStorageによるアイコン画像保存機能
   has_one_attached :profile_image
-  
+
   # プロフィール画像を取得するためのメソッド
   def get_profile_image(width,height)
     unless profile_image.attached?
@@ -43,4 +46,17 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width,height]).processed
   end
+
+  private
+
+  def profile_image_type
+    if profile_image.blob
+      if !profile_image.blob.content_type.in?(%('image/jpeg image/jpg image/png'))
+          errors.add(:profile_image, 'はjpeg、jpgまたはpng形式でアップロードしてください')
+      end
+    end
+  end
+
 end
+
+

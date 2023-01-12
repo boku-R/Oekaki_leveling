@@ -1,4 +1,12 @@
 <%= flash[:notice] %>
+<% if @user.errors.any? %>
+  <p><%= @user.errors.count %>errors prohibited this obj from being saved:</p>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <div class="h2">会員情報編集画面です</div>
 
@@ -7,7 +15,7 @@
 
 <%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
   <p>アイコン画像</p>
-  <!---->
+
   <%= f.file_field :profile_image, accept: "image/jpg, image/jpeg, image/png" %>
 
   <p>メールアドレス</p>

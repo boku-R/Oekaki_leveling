@@ -1,4 +1,12 @@
 <%= flash[:notice] %>
+<% if @user.errors.any? %>
+  <p><%= @user.errors.count %>errors prohibited this obj from being saved:</p>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <div class="h2">マイページです</div>
 

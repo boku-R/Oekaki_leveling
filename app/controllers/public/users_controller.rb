@@ -9,13 +9,16 @@ class Public::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    # @user.valid?
     if @user.update(user_params)
       # フラッシュメッセージを設定
       flash[:notice] = "ユーザ情報は編集されました"
       redirect_to user_path
     else
+      # @user = User.find(params[:id])
+      @user.profile_image.blob = User.find(params[:id]).profile_image.blob
       flash[:notice] = "ユーザ情報を編集できませんでした"
-      redirect_to user_path
+      render :edit
     end
   end
 
