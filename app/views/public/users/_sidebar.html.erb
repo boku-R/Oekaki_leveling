@@ -1,8 +1,12 @@
 <div class="h2">ユーザページのサイドバーです</div>
 
 <%= link_to "プロフィール表示", user_path(user.id), method: :get, class: "nav-link" %>
-<%= link_to "プロフィール編集", edit_user_path(user.id), method: :get, class: "nav-link" %>
+<% if user.username != "guestuser" %>
+  <%= link_to "プロフィール編集", edit_user_path(user.id), method: :get, class: "nav-link" %>
+<% end %>
 <%= link_to "フォロー", user_followings_path(user.id), method: :get, class: "nav-link" %>
 <%= link_to "フォロワー", user_followers_path(user.id), method: :get, class: "nav-link" %>
 <%= link_to "いいね一覧", favorites_user_path(@user), method: :get, class: "nav-link" %>
-<%= link_to "退会", unsubscribe_path(@user), method: :get, class: "nav-link" %>
+<% if user.username != "guestuser" %>
+  <%= link_to "退会", unsubscribe_path(@user), method: :get, class: "nav-link" %>
+<% end %>

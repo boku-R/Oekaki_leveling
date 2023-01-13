@@ -1,21 +1,22 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'relationships/followings'
-    get 'relationships/followers'
-  end
-  # 顧客用
+  # ユーザのログインに関する記述
   # URL /users/sign_in ...
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
 
-  # 管理者用
+  # 管理者のログインに関する記述
   # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
+
+  # ゲストログインのための記述
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
 
   # public のネームスペース
   scope module: :public do

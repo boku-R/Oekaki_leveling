@@ -4,8 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # ActiveStorageによるアイコン画像保存機能
+  has_one_attached :profile_image
+
   # いいねへの関連付け
   has_many :favorites, dependent: :destroy
+
+  # PostCommentに対する関連付け
+  has_many :post_comments, dependent: :destroy
 
   # 下記フォロー機能
   # フォローをした、されたの関係を実装
@@ -35,9 +41,6 @@ class User < ApplicationRecord
   # ユーザのアイコン画像アップロードに対してのバリデーション(.jpg .jpeg .pngのみ許可)
   validate :profile_image_type
 
-  # ActiveStorageによるアイコン画像保存機能
-  has_one_attached :profile_image
-
   # プロフィール画像を取得するためのメソッド
   def get_profile_image(width,height)
     unless profile_image.attached?
@@ -47,8 +50,17 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width,height]).processed
   end
 
+  # ゲストログインのためのメソッドを定義
+  def self.guest
+    find_or_create_by!(username: 'guestuser', email:'guest@example.com', handlename:'ゲストユーザー')do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.username = "guestuser"
+    end
+  end
+
   private
 
+  # アップロードされた画像データに対するバリデーション
   def profile_image_type
     if profile_image.blob
       if !profile_image.blob.content_type.in?(%('image/jpeg image/jpg image/png'))

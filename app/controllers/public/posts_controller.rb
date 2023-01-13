@@ -18,6 +18,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     # 投稿主のユーザ
     @user = User.find(@post.user_id)
+    @post_comment = PostComment.new
   end
 
   def create
