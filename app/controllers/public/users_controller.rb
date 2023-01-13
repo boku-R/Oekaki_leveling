@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit, :unsubscribe]
+  before_action :ensure_current_user, only: [:edit, :update, :unsubscribe]
 
   def show
     @user = User.find(params[:id])
@@ -55,6 +56,14 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.username == "guestuser"
       redirect_to user_path(current_user) , notice: 'ゲストユーザーはプロフィール編集画面、もしくは退会画面へ遷移できません。'
+    end
+  end
+
+  # ログイン中のユーザと、ユーザページで表示しているユーザが異なるときの権限の設定
+  def ensure_current_user
+    if current_user.id != params[:id].to_i
+      flash[:notice] = "権限がありません"
+      redirect_to user_path
     end
   end
 
