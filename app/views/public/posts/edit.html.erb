@@ -19,7 +19,7 @@
 
   <%= f.fields_for :illusts do |i| %>
     <p>イラスト</p>
-    <%= i.file_field :illust_image, accept: "image/jpg" %>
+    <%= i.file_field :illust_image, accept: "image/jpg,image/png,image/jpeg" %>
     <!--上から順に、イラストの種類(illust.step)をhidden_fieldで投入-->
     <%= i.hidden_field :step, value: @illust_step %>　step:<%= @illust_step %>
     <% @illust_step = @illust_step + 1 %>
