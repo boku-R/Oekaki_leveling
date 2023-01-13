@@ -23,10 +23,17 @@ class Public::UsersController < ApplicationController
   end
 
   def favorites
+    @user = User.find(params[:id])
+    favorites = Favorite.where(user_id: @user.id).pluck(:illust_id)
+    @favorite_illusts = Illust.find(favorites)
   end
 
-  def withdraw
-    @user = current_user
+  def unsubscribe
+    @user = User.find(params[:id])
+  end
+
+  def withdrawal
+    @user = User.find(params[:id])
     @user.update(is_deleted: true)
     reset_session
     flash[:notice] = "退会処理を実行いたしました"

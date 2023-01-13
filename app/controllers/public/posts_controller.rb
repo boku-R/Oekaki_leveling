@@ -25,13 +25,10 @@ class Public::PostsController < ApplicationController
     @post.user_id = current_user.id
     if @post.save
       flash[:notice] = "投稿は保存されました"
-      # 【済】books#showにリダイレクトしないといけない
       redirect_to post_path(@post.id)
-      # redirect_to post_path(@post.id)
     else
       flash[:notice] = "投稿を保存できませんでした"
       redirect_to new_post_path
-      # redirect_to post_path(@post.id)
     end
   end
 
@@ -44,7 +41,6 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      # フラッシュメッセージを設定
       flash[:notice] = "投稿は編集されました"
       redirect_to post_path(@post.id)
     else
@@ -54,7 +50,7 @@ class Public::PostsController < ApplicationController
 
   def destroy
     post = Post.find(params[:id])
-    post.destroy #レコード削除
+    post.destroy
     redirect_to posts_path
   end
 

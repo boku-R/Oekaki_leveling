@@ -30,9 +30,15 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
+      member do
+        get :favorites
+      end
     end
     get 'users/:id/favorites' => 'users#favorites' , as: 'favorites'
-    patch 'users/:id/withdraw' => 'users#withdraw' , as: 'withdraw'
+    # 退会画面
+    get 'users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+    # 論理削除用のルーティング
+    patch 'users/:id/withdrawal' => 'users#withdrawal' , as: 'withdrawal'
     get 'search' => 'searches#search'
   end
 
