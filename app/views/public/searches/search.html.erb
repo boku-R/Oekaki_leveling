@@ -1,0 +1,60 @@
+<div class="h2">検索結果</div>
+
+<table class="table table-hover table-inverse">
+  <!--検索対象モデルがUserの時 -->
+  <% if @range == "ユーザを検索する" %>
+    <thead>
+      <tr>
+        <td></td>
+        <td>ユーザ名</td>
+        <td>ハンドルネーム</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <% if user.is_deleted == false %>
+          <tr>
+            <td>
+              <%= link_to user_path(user) do %>
+                <%= image_tag user.get_profile_image(100,100) %>
+              <% end %>
+            </td>
+            <td><%= user.username %></td>
+            <td><%= user.handlename %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% elsif @range == "投稿を検索する" %>
+    <!--検索対象モデルがPostの時 -->
+    <thead>
+      <tr>
+        <td></td>
+        <td>タイトル名</td>
+        <td>説明</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @posts.each do |post| %>
+        <% if post.is_deleted == false %>
+          <tr>
+            <td>
+              <% post.illusts.reverse_each do |illust| %>
+                <% if illust.illust_image.present? %>
+                  <%= link_to post_path(illust.post_id) do %>
+                    <!--リサイズ→真ん中を正方形にくり抜きます-->
+                    <p><%= image_tag illust.illust_image.variant(resize: "150x150", gravity: "center", crop: "100x100+0+0") %></p>
+                  <% end %>
+                  <!--イラストの画像を探すeach文から抜ける-->
+                  <% break %>
+                <% end %>
+              <% end %>
+            </td>
+            <td><%= post.title %></td>
+            <td><%= post.introduction %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>

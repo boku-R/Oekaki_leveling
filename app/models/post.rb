@@ -5,5 +5,10 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :illusts
 
   validates :title, presence: true
+  
+  # 検索
+  def self.looks(word)
+      @post = Post.where("title LIKE?","%#{word}%")
+  end
 
 end

@@ -58,6 +58,11 @@ class User < ApplicationRecord
     end
   end
 
+  # 検索
+  def self.looks(word)
+      @user = User.where(['username LIKE? OR handlename LIKE?',"%#{word}%", "%#{word}%"])
+  end
+
   private
 
   # アップロードされた画像データに対するバリデーション

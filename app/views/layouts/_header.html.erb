@@ -19,6 +19,9 @@
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
       </ul>
+      <ul>
+        <%= render "layouts/search" %>
+      </ul>
 
       <!--＜管理者がログインした場合＞-->
       <% elsif admin_signed_in? %>
