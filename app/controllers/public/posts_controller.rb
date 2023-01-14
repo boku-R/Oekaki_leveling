@@ -9,10 +9,13 @@ class Public::PostsController < ApplicationController
     4.times {
       @post.illusts.build
     }
+    # タグの箱を作る
+    @post.tags.new
   end
 
   def index
     @posts = Post.all
+    @tag_list = Tag.all
   end
 
   def show
@@ -20,12 +23,16 @@ class Public::PostsController < ApplicationController
     # 投稿主のユーザ
     @user = User.find(@post.user_id)
     @post_comment = PostComment.new
+    @post_tags = @post.tags
   end
 
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    # 受け取った値を","で区切って配列に変換
+    tag_list = params[:post][:name].split(',')
     if @post.save
+      @post.save_tag(tag_list)
       flash[:notice] = "投稿は保存されました"
       redirect_to post_path(@post.id)
     else
@@ -38,11 +45,15 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     # illust.stepに投入するための変数をここで準備
     @illust_step = 1
+    @tag_list = @post.tags.pluck(:name).join(',')
   end
 
   def update
     @post = Post.find(params[:id])
+    # 受け取った値を","で区切って配列に変換
+    tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
+      @post.save_tag(tag_list)
       flash[:notice] = "投稿は編集されました"
       redirect_to post_path(@post.id)
     else
@@ -60,7 +71,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title,:introduction,:user_id, :is_deleted, illusts_attributes: [:id, :post_id, :step, :illust_image])
+    params.require(:post).permit(:title,:introduction,:user_id, :is_deleted, illusts_attributes: [:id, :post_id, :step, :illust_image], tags_attributes: [:id, :name])
   end
 
   # ログイン中のユーザと、ユーザページで表示しているユーザが異なるときの権限の設定

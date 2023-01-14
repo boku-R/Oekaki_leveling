@@ -11,6 +11,11 @@
   <p>説明</p>
   <%= f.text_area :introduction %>
 
+  <div class = "field">
+    <%= f.label"タグ (,で区切ると複数タグ登録できます)" %>
+    <%= f.text_field :name, class: "form-control"%>
+  </div>
+
   <%= f.fields_for :illusts do |i| %>
     <p>イラスト</p>
     <%= i.file_field :illust_image, accept: "image/png,image/jpg,image/jpeg" %>

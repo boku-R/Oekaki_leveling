@@ -1,16 +1,24 @@
 <%= flash[:notice] %>
-<% @posts.each do |post| %>
-  <!--完成から順にイラスト画像を探し、画像を見つけたらそれをピックアップ、探すのをやめる-->
-  <% post.illusts.reverse_each do |illust| %>
-    <% if illust.illust_image.present? && !illust.post.is_deleted %>
-      <%= link_to post_path(illust.post_id) do %>
-        <!--リサイズ→真ん中を正方形にくり抜きます-->
-        <p><%= image_tag illust.illust_image.variant(resize: "150x150", gravity: "center", crop: "100x100+0+0") %></p>
-      <% end %>
-      <!--イラストの画像を探すeach文から抜ける-->
-      <% break %>
-    <% end %>
-  <% end %>
 
-  <span><%= post.title %></span>
+<% @tag_list.each do |list|%>
+  <%= list.name %>
+  <%="(#{list.posts.count})" %>
+<% end %>
+
+<% @posts.each do |post| %>
+  <% if post.is_deleted == false %>
+    <!--完成から順にイラスト画像を探し、画像を見つけたらそれをピックアップ、探すのをやめる-->
+    <% post.illusts.reverse_each do |illust| %>
+      <% if illust.illust_image.present? %>
+        <%= link_to post_path(illust.post_id) do %>
+          <!--リサイズ→真ん中を正方形にくり抜きます-->
+          <p><%= image_tag illust.illust_image.variant(resize: "150x150", gravity: "center", crop: "100x100+0+0") %></p>
+        <% end %>
+        <!--イラストの画像を探すeach文から抜ける-->
+        <% break %>
+      <% end %>
+    <% end %>
+    <i class="fas fa-tags"></i><%= post.tags.map(&:name).join(',') %>
+    <span><%= post.title %></span>
+  <% end %>
 <% end %>

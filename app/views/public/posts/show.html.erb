@@ -16,6 +16,11 @@
 
 【タイトル：<%= @post.title %>】
 【説明：<%= @post.introduction %>】
+【タグ：
+  <% @post_tags.each do |tag| %>
+    <%= tag.name %><%= "(#{tag.posts.count})" %>
+  <% end %>
+  】
 <% if @post.user_id == current_user.id %>
   <%= link_to "投稿を削除", post_path(@post), method: :delete, class:"btn btn-danger" %>
 <% end %>
