@@ -1,7 +1,9 @@
 <div class="h2">いいね一覧</div>
 <% @favorite_illusts.each do |illust|%>
-  <%= link_to post_path(illust.post_id) do %>
-    <%= image_tag illust.illust_image.variant(resize: "150x150", gravity: "center", crop: "100x100+0+0").processed %>
+  <% if illust.post.is_deleted == false %>
+    <%= link_to post_path(illust.post_id) do %>
+      <%= image_tag illust.illust_image.variant(resize: "150x150", gravity: "center", crop: "100x100+0+0").processed %>
+    <% end %>
+    <%= illust.post.title %>　step:<%= illust.step %>
   <% end %>
-  <%= illust.post.title %>　step:<%= illust.step %>
 <% end %>

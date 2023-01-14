@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :ensure_deleted_post, only: [:show, :edit]
 
   def new
     @post = Post.new
@@ -51,14 +52,23 @@ class Public::PostsController < ApplicationController
 
   def destroy
     post = Post.find(params[:id])
-    post.destroy
+    post.is_deleted = true
+    post.save
     redirect_to posts_path
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title,:introduction,:user_id, illusts_attributes: [:id, :post_id, :step, :illust_image])
+    params.require(:post).permit(:title,:introduction,:user_id, :is_deleted, illusts_attributes: [:id, :post_id, :step, :illust_image])
   end
 
+  # ログイン中のユーザと、ユーザページで表示しているユーザが異なるときの権限の設定
+  def ensure_deleted_post
+    @post = Post.find(params[:id])
+    if @post.is_deleted == true
+      flash[:notice] = "指定した記事は削除されております"
+      redirect_to posts_path
+    end
+  end
 end
