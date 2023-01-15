@@ -45,13 +45,13 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     # illust.stepに投入するための変数をここで準備
     @illust_step = 1
-    @tag_list = @post.tags.pluck(:name).join(',')
+    @tag_list = @post.tags.pluck(:name).join(' ')
   end
 
   def update
     @post = Post.find(params[:id])
     # 受け取った値を","で区切って配列に変換
-    tag_list = params[:post][:name].split(',')
+    tag_list = params[:post][:name].split
     if @post.update(post_params)
       @post.save_tag(tag_list)
       flash[:notice] = "投稿は編集されました"
@@ -66,6 +66,16 @@ class Public::PostsController < ApplicationController
     post.is_deleted = true
     post.save
     redirect_to posts_path
+  end
+
+  # タグ検索
+  def search_tag
+    # 検索結果画面でタグ一覧表示
+    @tag_list = Tag.all
+    # リンクを押されたタグを受け取る
+    @tag = Tag.find(params[:tag_id])
+    # 検索されたタグに紐づく投稿を表示
+    @posts = @tag.posts
   end
 
   private

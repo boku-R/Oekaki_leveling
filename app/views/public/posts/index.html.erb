@@ -1,8 +1,10 @@
 <%= flash[:notice] %>
 
 <% @tag_list.each do |list|%>
-  <%= list.name %>
-  <%="(#{list.posts.count})" %>
+  <% if list.posts.count > 0 %>
+    <%= link_to list.name, search_tag_path(tag_id: list.id) %>
+    <%="(#{list.posts.count})" %>
+  <% end %>
 <% end %>
 
 <% @posts.each do |post| %>

@@ -41,6 +41,8 @@ Rails.application.routes.draw do
     # 論理削除用のルーティング
     patch 'users/:id/withdrawal' => 'users#withdrawal' , as: 'withdrawal'
     get 'search' => 'searches#search'
+    # タグを押すと、そのタグに関連づけられた投稿を表示するためのルーティング
+    get 'search_tag' => "posts#search_tag"
   end
 
   # admin　のネームスペース

@@ -56,5 +56,13 @@
         <% end %>
       <% end %>
     </tbody>
+  <% elsif @range == "タグを検索する" %>
+    <!--タグの一覧表示-->
+    <% @tag.each do |list|%>
+      <% if list.posts.count > 0 %>
+        <%= link_to list.name, search_tag_path(tag_id: list.id) %>
+        <%="(#{list.posts.count})" %>
+      <% end %>
+    <% end %>
   <% end %>
 </table>

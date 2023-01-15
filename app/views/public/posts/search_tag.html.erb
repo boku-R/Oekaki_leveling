@@ -1,0 +1,33 @@
+<div class="container">
+<h5>タグが<%= @tag.name %>の投稿一覧</h5>
+
+<!--タグリスト-->
+<% @tag_list.each do |list|%>
+  <% if list.posts.count > 0 %>
+    <%= link_to list.name, search_tag_path(tag_id: list.id) %>
+    <%= "(#{list.posts.count})" %>
+  <% end %>
+<% end %>
+
+<% @posts.each do |post| %>
+  <!--投稿はカードで囲む-->
+  <div class = "card" >
+    <div class = "card-body" >
+      <h6 class ="card-title" >
+        <%= link_to post_path(post.id) do %>
+          <!--完成から順にイラスト画像を探し、画像を見つけたらそれをピックアップ、探すのをやめる-->
+          <% post.illusts.reverse_each do |illust| %>
+            <% if illust.illust_image.present? %>
+              <!--リサイズ→真ん中を正方形にくり抜きます-->
+              <p><%= image_tag illust.illust_image.variant(resize: "150x150", gravity: "center", crop: "100x100+0+0") %></p>
+              <!--イラストの画像を探すeach文から抜ける-->
+              <% break %>
+            <% end %>
+          <% end %>
+          <!--タイトル表示される文字数は２５文字までにしてます-->
+          <%= post.title.truncate(25) %>
+        <% end %>
+      </h6>
+    </div>
+  </div>
+<% end %>
