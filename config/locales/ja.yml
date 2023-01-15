@@ -1,0 +1,8 @@
+ja:
+ enums:
+  illust:
+   step:
+    draft: "下書き"
+    linedraw: "線画"
+    color: "色塗り"
+    finish: "仕上げ"

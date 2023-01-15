@@ -4,7 +4,7 @@ class Public::PostsController < ApplicationController
   def new
     @post = Post.new
     # illust.stepに投入するための変数をここで準備
-    @illust_step = 1
+    @illust_step = 0
     # ４つのイラスト投稿の箱を作る
     4.times {
       @post.illusts.build
@@ -45,7 +45,7 @@ class Public::PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     # illust.stepに投入するための変数をここで準備
-    @illust_step = 1
+    @illust_step = 0
     @tag_list = @post.tags.pluck(:name).join(' ')
   end
 
@@ -82,7 +82,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title,:introduction,:user_id, :is_deleted, illusts_attributes: [:id, :post_id, :step, :illust_image], tags_attributes: [:id, :name])
+    params.require(:post).permit(:title,:introduction,:user_id, :is_deleted, illusts_attributes: [:id, :post_id, :step, :illust_image])
   end
 
   # ログイン中のユーザと、ユーザページで表示しているユーザが異なるときの権限の設定

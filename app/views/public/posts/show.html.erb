@@ -38,7 +38,8 @@
             <%= image_tag 'no_image', size: "150x150" %>
           <% end %>
         </th>
-        <th><%= illust.step %></th>
+        <th><%= I18n.t("enums.illust.step.#{Illust.steps.keys[Illust.steps[illust.step]]}") %></th>
+        <%# byebug %>
         <th>
           <% if illust.illust_image.present? %>
             <% if illust.favorited_by?(current_user) %>

@@ -9,6 +9,9 @@ class Illust < ApplicationRecord
   # ユーザのアイコン画像アップロードに対してのバリデーション(.jpg .jpeg .pngのみ許可)
   validate :illust_image_type
 
+  # enumの定義
+  enum step: { draft: 0, linedraw: 1, color: 2, finish: 3}
+
   # ユーザがファボっているか判定するメソッド
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

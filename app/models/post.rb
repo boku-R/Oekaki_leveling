@@ -6,8 +6,6 @@ class Post < ApplicationRecord
   # タグに対するリレーション
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags, dependent: :destroy
-  accepts_nested_attributes_for :post_tags, allow_destroy: true
-  accepts_nested_attributes_for :tags
 
   validates :title, presence: true
 

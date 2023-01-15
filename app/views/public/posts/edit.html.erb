@@ -18,7 +18,7 @@
   <%= f.text_area :introduction %>
 
   <div class = "field">
-    <%= f.label "タグ (,で区切ると複数タグ登録できます)" %>
+    <%= f.label "タグ (半角スペースで区切ると複数タグ登録できます)※全角スペースはだめです" %>
     <%= f.text_field :name, value: @tag_list, class: "form-control" %>
   </div>
 
@@ -26,7 +26,7 @@
     <p>イラスト</p>
     <%= i.file_field :illust_image, accept: "image/jpg,image/png,image/jpeg" %>
     <!--上から順に、イラストの種類(illust.step)をhidden_fieldで投入-->
-    <%= i.hidden_field :step, value: @illust_step %>　step:<%= @illust_step %>
+    <%= i.hidden_field :step, value: Illust.steps.keys[@illust_step] %>　step:<%= I18n.t("enums.illust.step.#{Illust.steps.keys[@illust_step]}") %>
     <% @illust_step = @illust_step + 1 %>
   <% end %>
 

@@ -63,3 +63,4 @@ gem 'dotenv-rails'
 gem "aws-sdk-s3", require: false
 gem 'mini_magick', '~> 4.8'
 gem 'kaminari','~> 1.2.1'
+gem 'enum_help'
