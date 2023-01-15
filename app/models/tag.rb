@@ -10,4 +10,9 @@ class Tag < ApplicationRecord
     @tag = Tag.where("name LIKE?","%#{word}%")
   end
 
+  # Tagに紐づくPostを統合し「.joins(:posts)」、Postが論理削除されていないようなタグを絞り込み「.merge(Post.where(is_deleted: false))」、重複をはじく「.distinct」
+  def self.using_tags
+    @tag = Tag.joins(:posts).merge(Post.where(is_deleted: false)).distinct
+  end
+
 end

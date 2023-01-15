@@ -14,8 +14,9 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
-    @tag_list = Tag.all
+    # 論理削除された投稿を除外
+    @posts = Post.where(is_deleted: false).page(params[:page])
+    @tag_list = Tag.using_tags
   end
 
   def show
@@ -50,7 +51,7 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    # 受け取った値を","で区切って配列に変換
+    # 受け取った値をスペースで区切って配列に変換
     tag_list = params[:post][:name].split
     if @post.update(post_params)
       @post.save_tag(tag_list)
@@ -70,12 +71,12 @@ class Public::PostsController < ApplicationController
 
   # タグ検索
   def search_tag
-    # 検索結果画面でタグ一覧表示
-    @tag_list = Tag.all
+    # 検索結果画面でタグ一覧表示（投稿に紐づいていない、また紐づいた投稿が削除されたタグを除外）
+    @tag_list = Tag.using_tags
     # リンクを押されたタグを受け取る
     @tag = Tag.find(params[:tag_id])
     # 検索されたタグに紐づく投稿を表示
-    @posts = @tag.posts
+    @posts = @tag.posts.where(is_deleted: false)
   end
 
   private

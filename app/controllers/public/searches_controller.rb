@@ -5,16 +5,12 @@ class Public::SearchesController < ApplicationController
     @range = params[:range]
 
     if @range == "ユーザを検索する"
-      @users = User.looks(params[:word])
+      @users = User.where(is_deleted: false).looks(params[:word]).page(params[:page])
     elsif @range == "投稿を検索する"
-      @posts = Post.looks(params[:word])
+      @posts = Post.where(is_deleted: false).looks(params[:word]).page(params[:page])
     elsif @range == "タグを検索する"
       # 検索結果画面でタグ一覧表示
-      @tag_list = Tag.all
-      # リンクを押されたタグを受け取る
-      @tag = Tag.looks(params[:word])
-      # 検索されたタグに紐づく投稿を表示
-      # @posts = @tag.posts
+      @tags = Tag.using_tags.looks(params[:word]).page(params[:page])
     end
   end
 
