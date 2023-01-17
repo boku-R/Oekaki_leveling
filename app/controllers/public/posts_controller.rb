@@ -31,7 +31,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     # 受け取った値を","で区切って配列に変換
-    tag_list = params[:post][:name].split(',')
+    tag_list = params[:post][:name].split
     if @post.save
       @post.save_tag(tag_list)
       flash[:notice] = "投稿は保存されました"

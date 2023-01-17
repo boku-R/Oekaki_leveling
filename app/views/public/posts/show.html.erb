@@ -31,15 +31,13 @@
         <th>
           <% if illust.illust_image.present? %>
             <%= link_to post_path(illust.post_id) do %>
-              <!--リサイズ→真ん中を正方形にくり抜きます-->
-              <p><%= image_tag illust.illust_image.variant(resize: "150x150", gravity: "center", crop: "100x100+0+0").processed %></p>
+              <p><%= image_tag illust.illust_image.variant(resize: "100x100").processed %></p>
             <% end %>
           <% else %>
-            <%= image_tag 'no_image', size: "150x150" %>
+            <%= image_tag image_url('no_image'), size: "100x100" %>
           <% end %>
         </th>
         <th><%= I18n.t("enums.illust.step.#{Illust.steps.keys[Illust.steps[illust.step]]}") %></th>
-        <%# byebug %>
         <th>
           <% if illust.illust_image.present? %>
             <% if illust.favorited_by?(current_user) %>

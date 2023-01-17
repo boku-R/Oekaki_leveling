@@ -17,8 +17,7 @@
           <!--完成から順にイラスト画像を探し、画像を見つけたらそれをピックアップ、探すのをやめる-->
           <% post.illusts.reverse_each do |illust| %>
             <% if illust.illust_image.present? %>
-              <!--リサイズ→真ん中を正方形にくり抜きます-->
-              <p><%= image_tag illust.illust_image.variant(resize: "150x150", gravity: "center", crop: "100x100+0+0") %></p>
+              <p><%= image_tag illust.illust_image.variant(resize: "100x100").processed %></p>
               <!--イラストの画像を探すeach文から抜ける-->
               <% break %>
             <% end %>
