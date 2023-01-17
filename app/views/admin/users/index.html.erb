@@ -1,0 +1,40 @@
+<%= flash[:notice] %>
+
+<table class="table table-hover table-inverse">
+  <thead>
+    <tr>
+      <td></td>
+      <td>ユーザネーム</td>
+      <td>ハンドルネーム</td>
+      <td>レベル</td>
+      <td>退会状況</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= link_to user_path(user) do %>
+            <%= image_tag user.get_profile_image(100,100) %>
+          <% end %>
+        </td>
+        <td><%= user.username %></td>
+        <td><%= user.handlename %></td>
+        <td><%= user.level %></td>
+        <td>
+          <% if user.is_deleted == true %>
+            退会済み
+          <% else %>
+            有効
+          <% end %>
+        </td>
+        <td>
+          <%= link_to "編集する", edit_admin_user_path(user.id) , class: "btn btn-primary" %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td><%= paginate @users %></td>
+    </tr>
+  </tbody>
+</table>

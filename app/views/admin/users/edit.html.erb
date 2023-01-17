@@ -1,0 +1,32 @@
+<%= flash[:notice] %>
+
+<div class="h2">管理者によるユーザ編集画面です</div>
+
+<%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
+  <p>アイコン画像</p>
+
+  <%= f.file_field :profile_image, accept: "image/jpg, image/jpeg, image/png" %>
+
+  <p>メールアドレス</p>
+  <%= f.text_field :email, size:"40" %>
+
+  <p>ユーザ名</p>
+  <%= f.text_field :username, size:"40" %>
+
+  <p>ハンドルネーム</p>
+  <%= f.text_field :handlename,size:"40" %>
+
+  <p>パスワード（実装予定）</p>
+  <%#= f.text_field :password, size:"40" %>
+
+  <p>退会フラグ</p>
+  <% if @user.is_deleted == false %>
+    <%= f.radio_button :is_deleted, false, checked:true, class:"text-success" %>有効　<%= f.radio_button :is_deleted, true %>退会
+  <% else %>
+    <%= f.radio_button :is_deleted, false, class: "text-success" %>有効　<%= f.radio_button :is_deleted, true, checked:true %>退会
+  <% end %>
+
+  <div class="col text-center">
+    <%= f.submit "　変更を保存　",class:"btn btn-success center-block"  %>
+  </div>
+<% end %>

@@ -13,3 +13,8 @@
     handlename: "ほげ#{n+1}"
     )
 end
+
+Admin.create!(
+ email: 'admin@admin.com',
+ password: 'password'
+)

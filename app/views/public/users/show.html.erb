@@ -18,5 +18,7 @@
 
 <p>ユーザ名：<%= @user.username %></p>
 <p>ハンドルネーム：<%= @user.handlename %></p>
-<p>メールアドレス：<%= @user.email %></p>
+<% if @user == current_user %>
+  <p>メールアドレス：<%= @user.email %></p>
+<% end %>
 <p>レベル：<%= @user.level %></p>

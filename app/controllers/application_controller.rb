@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
 
+  def after_sign_in_path_for(resource)
+    about_path
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -12,7 +16,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :username, :handlename])
 
     # ログイン登録（sign_in）の際に、データ操作を許可
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :username])
 
     # アカウント編集の時に諸々のストロングパラメータを追加
     devise_parameter_sanitizer.permit(:account_update, keys: [:email, :encrypted_password, :is_deleted, :username, :handlename, :profile_image])

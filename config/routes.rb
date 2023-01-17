@@ -47,7 +47,8 @@ Rails.application.routes.draw do
 
   # admin　のネームスペース
   namespace :admin do
-    root to: 'homes#top'
+    resources :users, only: [:index, :edit, :update]
+    resources :posts, only: [:index, :edit, :update]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
