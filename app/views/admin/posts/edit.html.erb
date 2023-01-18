@@ -1,0 +1,45 @@
+<% if @post.errors.any? %>
+  <p><%= @post.errors.count %>errors prohibited this obj from being saved:</p>
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2>管理者投稿編集画面です</h2>
+
+<%= render "admin/users/topbar", user: @user %>
+
+<h2>編集ページです</h2>
+
+<%= form_with model: @post, url: admin_post_path(@post.id), method: :patch do |f| %>
+
+  <p>タイトル</p>
+  <%= f.text_field :title %>
+
+  <p>説明</p>
+  <%= f.text_area :introduction %>
+
+  <div class = "field">
+    <%= f.label "タグ (半角スペースで区切ると複数タグ登録できます)※全角スペースはだめです" %>
+    <%= f.text_field :name, value: @tag_list, class: "form-control" %>
+  </div>
+
+  <p>削除フラグ</p>
+  <% if @post.is_deleted == false %>
+    <%= f.radio_button :is_deleted, false, checked:true, class:"text-success" %>有効　<%= f.radio_button :is_deleted, true %>退会
+  <% else %>
+    <%= f.radio_button :is_deleted, false, class: "text-success" %>有効　<%= f.radio_button :is_deleted, true, checked:true %>退会
+  <% end %>
+
+  <%= f.fields_for :illusts do |i| %>
+    <p>イラスト</p>
+    <%= i.file_field :illust_image, accept: "image/jpg,image/png,image/jpeg" %>
+    <!--上から順に、イラストの種類(illust.step)をhidden_fieldで投入-->
+    <%= i.hidden_field :step, value: Illust.steps.keys[@illust_step] %>　step:<%= I18n.t("enums.illust.step.#{Illust.steps.keys[@illust_step]}") %>
+    <% @illust_step = @illust_step + 1 %>
+  <% end %>
+
+  <p><%= f.submit '投稿する',class:"btn btn-success" %></p>
+<% end %>

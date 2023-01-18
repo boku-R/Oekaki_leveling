@@ -1,0 +1,7 @@
+<%= link_to admin_user_path(user) do %>
+  <%= image_tag user.get_profile_image(100,100) %>
+<% end %>
+
+<p>レベル：<%= user.level %></p>
+<p>ユーザネーム：<%= user.username%></p>
+<p>ハンドルネーム：<%= user.handlename %></p>

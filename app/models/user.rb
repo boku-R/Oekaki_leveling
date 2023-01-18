@@ -7,6 +7,9 @@ class User < ApplicationRecord
   # ActiveStorageによるアイコン画像保存機能
   has_one_attached :profile_image
 
+  # 投稿への関連付け
+  has_many :posts, dependent: :destroy
+
   # いいねへの関連付け
   has_many :favorites, dependent: :destroy
 

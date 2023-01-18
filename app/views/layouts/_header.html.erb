@@ -4,7 +4,7 @@
 
     <!--ユーザがサインインした場合-->
     <% if user_signed_in? %>
-    <span>ようこそ！<%= current_user.handlename %> さん</span>
+      <span>ようこそ！<%= current_user.handlename %> さん</span>
       <ul class="nav justify-content-end">
         <li class="nav-item">
           <%= link_to "マイページ", user_path(current_user.id), method: :get, class: "nav-link" %>
@@ -24,13 +24,22 @@
       </ul>
 
       <!--＜管理者がログインした場合＞-->
-      <% elsif admin_signed_in? %>
+    <% elsif admin_signed_in? %>
+      <span>管理者でログインしています</span>
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <%= link_to "ユーザ一覧", admin_users_path, method: :get, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "作品一覧", admin_posts_path, method: :get, class: "nav-link" %>
+        </li>
         <li class="nav-item">
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
         </li>
+      </ul>
 
       <!--＜サインインしていない場合＞-->
-      <% else %>
+    <% else %>
       <ul class="nav justify-content-end">
         <li class="nav-item">
           <%= link_to "About", about_path, class: "nav-link" %>

@@ -1,9 +1,12 @@
 class Public::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit, :unsubscribe]
+  # ログインしていない状態にて特定のアクション以外を制限する
+  before_action :authenticate_user!, except: [:show, :favorites, :search_tag]
   before_action :ensure_current_user, only: [:edit, :update, :unsubscribe]
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.where(is_deleted: false).page(params[:page])
   end
 
   def edit

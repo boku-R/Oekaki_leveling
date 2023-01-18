@@ -1,4 +1,11 @@
 class Admin::UsersController < ApplicationController
+  # 管理者だけが管理者機能を使えるようにする
+  before_action :authenticate_admin!
+
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts.page(params[:page])
+  end
 
   def index
     # 論理削除されたものを含む全ての投稿、使われていないタグもすべて表示

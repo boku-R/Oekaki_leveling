@@ -47,8 +47,14 @@ Rails.application.routes.draw do
 
   # admin　のネームスペース
   namespace :admin do
-    resources :users, only: [:index, :edit, :update]
-    resources :posts, only: [:index, :edit, :update]
+    resources :users, only: [:index, :edit, :update, :show]
+    resources :posts, only: [:index, :edit, :update, :show] do
+      resources :post_comments, only: [:destroy]
+      patch 'post_comments/:id' => 'post_comments#restore'
+    end
+    get 'search' => 'searches#search'
+    # タグを押すと、そのタグに関連づけられた投稿を表示するためのルーティング
+    get 'search_tag' => "posts#search_tag"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
-  # ログインしていない状態では、トップページとアバウトページしか閲覧できない
-  before_action :authenticate_user!, except: [:top, :about]
+  # ユーザログインしていない状態では、トップページとアバウトページしか閲覧できない
+  # before_action :authenticate_user!, except: [:top, :about]
+  # 管理者ログインしていない状態では、トップページとアバウトページしか閲覧できない
+  # before_action :authenticate_admin!, except: [:top, :about]
   # deviseによる会員登録にて、ユーザ名とハンドルネームを登録させる
   before_action :configure_permitted_parameters, if: :devise_controller?
 

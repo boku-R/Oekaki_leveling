@@ -22,3 +22,23 @@
   <p>メールアドレス：<%= @user.email %></p>
 <% end %>
 <p>レベル：<%= @user.level %></p>
+
+
+<% @posts.each do |post| %>
+  <!--完成から順にイラスト画像を探し、画像を見つけたらそれをピックアップ、探すのをやめる-->
+  <% post.illusts.reverse_each do |illust| %>
+    <% if illust.illust_image.present? %>
+      <%= link_to post_path(illust.post_id) do %>
+        <!--リサイズ→真ん中を正方形にくり抜きます-->
+        <p><%= image_tag illust.illust_image.variant(resize: "100x100").processed %></p>
+      <% end %>
+      <!--イラストの画像を探すeach文から抜ける-->
+      <% break %>
+    <% end %>
+  <% end %>
+  <i class="fas fa-tags"></i><%= post.tags.map(&:name).join(',') %>
+  <span><%= post.title %></span>
+<% end %>
+
+<%= paginate @posts %>
+

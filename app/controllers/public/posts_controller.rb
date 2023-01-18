@@ -1,5 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :ensure_deleted_post, only: [:show, :edit]
+  # ログインしていない状態にて特定のアクション以外を制限する
+  before_action :authenticate_user!, except: [:index, :show, :search_tag]
 
   def new
     @post = Post.new
@@ -44,6 +46,7 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @user = User.find(@post.user_id)
     # illust.stepに投入するための変数をここで準備
     @illust_step = 0
     @tag_list = @post.tags.pluck(:name).join(' ')

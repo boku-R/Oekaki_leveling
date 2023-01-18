@@ -1,0 +1,73 @@
+<%= flash[:notice] %>
+
+<h2>管理者の投稿詳細画面です</h2>
+
+<%= render "admin/users/topbar", user: @user %>
+
+【タイトル：<%= @post.title %>】
+【説明：<%= @post.introduction %>】
+【タグ：
+  <% @post_tags.each do |tag| %>
+    <%= link_to tag.name, search_tag_path(tag_id: tag.id) %><%= "(#{tag.posts.count})" %>
+  <% end %>
+】
+<% if @post.is_deleted == true %>
+  ★この投稿は削除されています★
+<% end %>
+
+<table class = "table">
+  <tbody>
+    <% @post.illusts.each do |illust| %>
+      <tr>
+        <th>
+          <% if illust.illust_image.present? %>
+            <p><%= image_tag illust.illust_image.variant(resize: "100x100").processed %></p>
+          <% else %>
+            <%= image_tag image_url('no_image'), size: "100x100" %>
+          <% end %>
+        </th>
+        <th><%= I18n.t("enums.illust.step.#{Illust.steps.keys[Illust.steps[illust.step]]}") %></th>
+        <th>
+          <% if illust.illust_image.present? && current_user.present? %>
+              <% if illust.favorited_by?(current_user) %>
+                <p>
+                  <%= link_to post_favorites_path(@post,illust_id: illust.id), method: :delete do %>
+                    ♥<%= illust.favorites.count %> いいね
+                  <% end %>
+                </p>
+              <% else %>
+                <p>
+                  <%= link_to post_favorites_path(@post,illust_id: illust.id), method: :post do %>
+                    ♡<%= illust.favorites.count %> いいね
+                  <% end %>
+                </p>
+              <% end %>
+          <% end %>
+        </th>
+      </tr>
+    <% end %>
+    <tr>
+      <th><%= link_to "（管理者権限）投稿を編集する", edit_admin_post_path(params[:id]), method: :get, class:"btn btn-success" %></th>
+    </tr>
+    <tr>
+      <th>
+        <p>コメント件数：<%= @post.post_comments.count %></p>
+      </th>
+    </tr>
+    <% @post.post_comments.each do |post_comment| %>
+      <tr>
+        <th>
+          <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+          <%= post_comment.user.username %>
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+          <% if post_comment.is_deleted == false %>
+            <%= link_to "（管理者権限）コメント削除", admin_post_post_comment_path(post_comment.post, post_comment), method: :delete, class:"btn btn-danger" %>
+          <% else %>
+            <%= link_to "（管理者権限）コメント復元", admin_post_post_comment_path(post_comment.post, post_comment), method: :patch, class:"btn btn-success" %>
+            <p>（削除されたコメントです）</p>
+          <% end %>
+        </th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
