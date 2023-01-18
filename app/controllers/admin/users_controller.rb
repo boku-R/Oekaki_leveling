@@ -19,6 +19,10 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
+      # ユーザを管理者権限で論理削除した際、関連する投稿も全て論理削除する
+      if @user.is_deleted == true
+        @user.posts.update(is_deleted: true)
+      end
       # フラッシュメッセージを設定
       flash[:notice] = "ユーザ情報は編集されました"
       render :edit

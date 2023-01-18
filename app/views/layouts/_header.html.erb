@@ -37,6 +37,9 @@
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
         </li>
       </ul>
+      <ul>
+        <%= render "layouts/search" %>
+      </ul>
 
       <!--＜サインインしていない場合＞-->
     <% else %>

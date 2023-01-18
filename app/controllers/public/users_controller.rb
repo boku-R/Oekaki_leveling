@@ -5,7 +5,7 @@ class Public::UsersController < ApplicationController
   before_action :ensure_current_user, only: [:edit, :update, :unsubscribe]
 
   def show
-    @user = User.find(params[:id])
+    @user = User.where(is_deleted: false).find(params[:id])
     @posts = @user.posts.where(is_deleted: false).page(params[:page])
   end
 
@@ -40,6 +40,8 @@ class Public::UsersController < ApplicationController
   def withdrawal
     @user = User.find(params[:id])
     @user.update(is_deleted: true)
+    # ユーザが退会するとき、関連するすべての投稿も論理削除する
+    @user.posts.update(is_deleted: true)
     reset_session
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to root_path
