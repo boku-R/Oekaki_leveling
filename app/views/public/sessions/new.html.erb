@@ -1,8 +1,8 @@
-<h2>Log in</h2>
+<h2>ログイン画面</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :username %><br />
+    <%= f.label :username , "ユーザ名" %><br />
     <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
   </div>
 
@@ -14,13 +14,14 @@
   <% if devise_mapping.rememberable? %>
     <div class="field">
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :remember_me, "ログイン情報を記憶する" %>
     </div>
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "ログインする", class:"btn btn-primary" %>
   </div>
 <% end %>
 
-<%= render "public/shared/links" %>
+<%#= render "public/shared/links" %>
+<%= link_to "アカウントをお持ちでない方はこちら", new_user_registration_path %>

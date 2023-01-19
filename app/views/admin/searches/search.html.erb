@@ -12,19 +12,18 @@
     </thead>
     <tbody>
       <% @users.each do |user| %>
-
-          <tr>
-            <td>
-              <%= link_to admin_user_path(user) do %>
-                <%= image_tag user.get_profile_image(100,100) %>
-              <% end %>
-            </td>
-            <td><%= user.username %></td>
-            <td><%= user.handlename %></td>
-            <% if user.is_deleted == true %>
-              <td>退会済み</td>
+        <tr>
+          <td>
+            <%= link_to admin_user_path(user) do %>
+              <%= image_tag user.get_profile_image(100,100) %>
             <% end %>
-          </tr>
+          </td>
+          <td><%= user.username %></td>
+          <td><%= user.handlename %></td>
+          <% if user.is_deleted == true %>
+            <td>退会済み</td>
+          <% end %>
+        </tr>
       <% end %>
     </tbody>
     <%= paginate @users %>

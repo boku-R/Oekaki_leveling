@@ -1,16 +1,16 @@
 <%= flash[:notice] %>
-<h2>Sign up</h2>
+<h2>新規登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :username %><br>
+    <%= f.label :username, "ユーザ名" %><br>
     <%= f.text_field :username %>
   </div>
 
   <div class="field">
-    <%= f.label :handlename %><br>
+    <%= f.label :handlename, "ハンドル名" %><br>
     <%= f.text_field :handlename %>
   </div>
 
@@ -22,7 +22,7 @@
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
@@ -33,8 +33,9 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規作成", class:"btn btn-success" %>
   </div>
 <% end %>
 
-<%= render "public/shared/links" %>
+<%#= render "public/shared/links"  %>
+<%= link_to "アカウントをお持ちの方はこちら", user_session_path %>
