@@ -6,17 +6,17 @@
 
   <div class="field">
     <%= f.label :username, "ユーザ名" %><br>
-    <%= f.text_field :username %>
+    <%= f.text_field :username, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :handlename, "ハンドル名" %><br>
-    <%= f.text_field :handlename %>
+    <%= f.text_field :handlename, required: true %>
   </div>
 
   <div class="field
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
   </div>
 
   <div class="field">
@@ -24,12 +24,12 @@
     <% if @minimum_password_length %>
     <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", required: true %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
   </div>
 
   <div class="actions">

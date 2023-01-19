@@ -51,7 +51,11 @@
                 <% end %>
               <% end %>
             </td>
-            <td><%= post.title %></td>
+            <td>
+              <%= link_to post_path(post) do %>
+                <%= post.title %>
+              <% end %>
+            </td>
             <td><%= post.introduction %></td>
           </tr>
         <% end %>

@@ -22,6 +22,7 @@
   <p>メールアドレス：<%= @user.email %></p>
 <% end %>
 <p>レベル：<%= @user.level %></p>
+<p>いいねの数 → 下書き：<%= @draft_favorite_count %> , 線画：<%= @linedraw_favorite_count %>, 色塗り：<%= @color_favorite_count %>, 完成：<%= @finish_favorite_count %></p>
 
 
 <% @posts.each do |post| %>
@@ -37,7 +38,9 @@
     <% end %>
   <% end %>
   <i class="fas fa-tags"></i><%= post.tags.map(&:name).join(',') %>
-  <span><%= post.title %></span>
+  <%= link_to post_path(post) do %>
+    <span><%= post.title %></span>
+  <% end %>
 <% end %>
 
 <%= paginate @posts %>

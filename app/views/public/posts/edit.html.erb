@@ -12,7 +12,7 @@
 <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
 
   <p>タイトル</p>
-  <%= f.text_field :title %>
+  <%= f.text_field :title, required: true %>
 
   <p>説明</p>
   <%= f.text_area :introduction %>

@@ -7,6 +7,11 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.where(is_deleted: false).find(params[:id])
     @posts = @user.posts.where(is_deleted: false).page(params[:page])
+
+    @draft_favorite_count = favorites_count(@user,"draft")
+    @linedraw_favorite_count = favorites_count(@user,"linedraw")
+    @color_favorite_count = favorites_count(@user,"color")
+    @finish_favorite_count = favorites_count(@user,"finish")
   end
 
   def edit
@@ -69,6 +74,15 @@ class Public::UsersController < ApplicationController
       flash[:notice] = "権限がありません"
       redirect_to user_path
     end
+  end
+
+  # 特定の段階のイラストに対するいいねの数を計算する
+  def favorites_count(user,step)
+    count = 0
+    user.posts.each do |f|
+      count += f.illusts.find_by(step: step).favorites.count
+    end
+    return count
   end
 
 end

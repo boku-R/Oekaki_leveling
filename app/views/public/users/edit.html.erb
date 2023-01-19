@@ -19,13 +19,13 @@
   <%= f.file_field :profile_image, accept: "image/jpg, image/jpeg, image/png" %>
 
   <p>メールアドレス</p>
-  <%= f.text_field :email, size:"40" %>
+  <%= f.email_field :email, size:"40", required: true %>
 
   <p>ユーザ名</p>
-  <%= f.text_field :username, size:"40" %>
+  <%= f.text_field :username, size:"40", required: true %>
 
   <p>ハンドルネーム</p>
-  <%= f.text_field :handlename,size:"40" %>
+  <%= f.text_field :handlename,size:"40", required: true %>
 
   <p>パスワード</p>
   <%#= f.text_field :encrypted_password, size:"40" %>
