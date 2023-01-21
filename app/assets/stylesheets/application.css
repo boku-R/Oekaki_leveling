@@ -13,3 +13,36 @@
  *= require_tree .
  *= require_self
  */
+
+/* ブラウザがそれぞれ持っているCSSをリセットするための記述 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #464646;
+  font-family: 'ヒラギノ丸ゴ ProN',sans-serif;
+}
+
+.background_green{
+  background-color: #C8BCA6;
+}
+
+.background_beige{
+  background-color: #E8CA3D;
+}
+
+.background_purple{
+  background-color: #E4DDD4;
+}
+
+/*aタグの中身（リンク）を青くしたくない*/
+a{
+  color: inherit;
+}
+
+/*画像を正方形で表現したい*/
+.image{
+	height: 200px;
+	width: 200px;
+	object-fit: cover;
+}

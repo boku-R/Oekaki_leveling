@@ -37,7 +37,7 @@ class Admin::UsersController < ApplicationController
 
   # Userのストロングパラメータ
   def user_params
-    params.require(:user).permit(:email, :is_deleted, :username, :handlename, :profile_image, :password)
+    params.require(:user).permit(:email, :is_deleted, :username, :handlename, :introduction, :profile_image, :password)
   end
 
 end

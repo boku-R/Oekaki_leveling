@@ -57,7 +57,7 @@ class Public::UsersController < ApplicationController
 
   # Userのストロングパラメータ
   def user_params
-    params.require(:user).permit(:email, :is_deleted, :username, :handlename, :profile_image)
+    params.require(:user).permit(:email, :is_deleted, :username, :handlename, :introduction, :profile_image)
   end
 
   # ゲストユーザでログインしているとき、ユーザ編集ができないようにする

@@ -1,16 +1,22 @@
-<!--ユーザのアイコン画像-->
-<%= link_to user_path(user) do %>
-  <%= image_tag user.get_profile_image(100,100) %>
-<% end %>
-
-<p>レベル：<%= user.level %></p>
-<p>ユーザネーム：<%= user.username%></p>
-<p>ハンドルネーム：<%= user.handlename %></p>
-
-<% if user != current_user && current_user.present? %>
-  <% if current_user.following?(user) %>
-    <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete, class:"btn btn-danger" %>
-  <% else %>
-    <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class:"btn btn-success" %>
-  <% end %>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-flex flex-column align-items-center">
+      <%= link_to user_path(user) do %>
+        <%= image_tag user.get_profile_image(100,100), class: "mr-3 rounded-circle d-block mx-auto" %>
+      <% end %>
+      <div class="text-center pt-3">
+          <% if user != current_user && current_user.present? %>
+            <% if current_user.following?(user) %>
+              <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete, class:"btn btn-danger btn-sm" %>
+            <% else %>
+              <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class:"btn btn-primary btn-sm" %>
+            <% end %>
+          <% end %>
+        <div class="h3 pt-2"><%= user.handlename %></div>
+        <div class="h5"><i class="fas fa-user"></i> <%= user.username %></div>
+        <div class="h5"><i class="fas fa-palette"></i> Lv.<%= user.level %></div>
+        <div class="h6"><%= user.introduction %></div>
+      </div>
+    </div>
+  </div>
+</div>
