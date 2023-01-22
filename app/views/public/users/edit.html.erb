@@ -8,32 +8,88 @@
   </ul>
 <% end %>
 
-<div class="h2">会員情報編集画面です</div>
-
-<%= render "topbar",user: @user %>
-<%= render "sidebar",user: @user %>
-
-<%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
-  <p>アイコン画像</p>
-
-  <%= f.file_field :profile_image, accept: "image/jpg, image/jpeg, image/png" %>
-
-  <p>メールアドレス</p>
-  <%= f.email_field :email, size:"40", required: true %>
-
-  <p>ユーザ名</p>
-  <%= f.text_field :username, size:"40", required: true %>
-
-  <p>ハンドルネーム</p>
-  <%= f.text_field :handlename,size:"40", required: true %>
-
-  <p>紹介文</p>
-  <%= f.text_field :introduction,size:"40" %>
-
-  <p>パスワード</p>
-  <%#= f.text_field :encrypted_password, size:"40" %>
-
-  <div class="col text-center">
-    <%= f.submit "　変更を保存　",class:"btn btn-success center-block"  %>
+<div class="container-fluid background_beige py-3">
+  <div class="row">
+    <div class="mx-auto">
+      <%= render "topbar",user: @user %>
+    </div>
   </div>
-<% end %>
+</div>
+
+<div class="container-fluid py-2 background_lightbeige">
+  <div class="row mt-4">
+    <div class="col-2">
+      <%= render "sidebar",user: @user %>
+    </div>
+
+    <div class="col-7 offset-md-1">
+      <%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
+
+        <div class="form-group">
+          <%= f.file_field :profile_image, accept: "image/jpg, image/jpeg, image/png", class:"img_field",  style: 'display:none;' %>
+          <%= image_tag @user.profile_image, fallback: 'no-image.jpeg', onClick: "$('.img_field').click()", class: "center-block img-thumbnail img-responsive img_prev mx-auto d-block" %>
+        </div>
+
+        <table class="table table-borderless text-right shadow p-3 mb-5 rounded">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 20%"></th>
+              <th scope="col" style="width: 80%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <p>メールアドレス</p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.email_field :email, class: "form-control", required: true %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ユーザ名</p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.text_field :username, class: "form-control", required: true %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ハンドルネーム</p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.text_field :handlename, class: "form-control", required: true %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>紹介文</p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.text_area :introduction, class: "form-control" %>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+
+
+
+        <div class="col text-center">
+          <%= f.submit "　変更を保存　",class:"btn btn-light center-block"  %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

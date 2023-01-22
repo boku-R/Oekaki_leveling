@@ -56,6 +56,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # ページネーション
 gem 'kaminari','~> 1.2.1'
+gem 'bootstrap4-kaminari-views'
+
 gem 'devise'
 #devise日本語化
 gem 'devise-i18n'

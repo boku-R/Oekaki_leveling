@@ -1,6 +1,8 @@
-<header class="sticky-top background_beige">
-  <nav class="navbar navbar-light">
-    <%= link_to "（ロゴが入る予定）", root_path, method: :get %>
+<header class="sticky-top background_yellow">
+  <nav class="navbar navbar-yellow">
+    <%= link_to root_path, method: :get do %>
+      <%= image_tag image_url('Oekaki_icon.png'), size: "60x60" %>
+    <% end %>
 
     <!--ユーザがサインインした場合-->
     <% if user_signed_in? %>
