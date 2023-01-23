@@ -29,47 +29,47 @@
           <%= image_tag @user.get_profile_image(200,200),class: "mr-3 rounded-circle d-block mx-auto" %>
         </div>
 
-      <div class="col-8">
-        <p>ユーザ名：<%= @user.username %></p>
-        <p>ハンドルネーム：<%= @user.handlename %></p>
-        <% if @user == current_user %>
-          <p><i class="fas fa-envelope"></i> <%= @user.email %></p>
-        <% end %>
-        <p><i class="fas fa-palette"></i> Lv.<%= @user.level %></p>
-        <p>下書き<i class="fas fa-heart"></i><%= @draft_favorite_count %>    線画<i class="fas fa-heart"></i><%= @linedraw_favorite_count %>   色塗り<i class="fas fa-heart"></i><%= @color_favorite_count %>    完成<i class="fas fa-heart"></i><%= @finish_favorite_count %></p>
+        <div class="col-8">
+          <p class="h4"><%= @user.handlename %></p>
+          <p>@<%= @user.username %></p>
+          <% if @user == current_user %>
+            <p><i class="fas fa-envelope"></i> <%= @user.email %></p>
+          <% end %>
+          <p><i class="fas fa-palette"></i> Lv.<%= @user.level %></p>
+          <p>下書き<i class="fas fa-heart"></i><%= @draft_favorite_count %>    線画<i class="fas fa-heart"></i><%= @linedraw_favorite_count %>   色塗り<i class="fas fa-heart"></i><%= @color_favorite_count %>    完成<i class="fas fa-heart"></i><%= @finish_favorite_count %></p>
+        </div>
       </div>
-    </div>
 
       <div class="row mb-2 mt-4">
         <p class="h3">投稿一覧</p>
       </div>
 
       <div class="row">
-          <% @posts.each do |post| %>
-            <div class="card text-center m-1 shadow">
-              <% post.illusts.reverse_each do |illust| %>
-                <% if illust.illust_image.present? %>
-                  <%= link_to post_path(illust.post_id) do %>
-                    <p><%= image_tag illust.illust_image.variant(gravity: :center, resize:"200x200^", crop:"200x200+0+0").processed %></p>
-                  <% end %>
-                  <!--イラストの画像を探すeach文から抜ける-->
-                  <% break %>
+        <% @posts.each do |post| %>
+          <div class="card text-center m-1 shadow">
+            <% post.illusts.reverse_each do |illust| %>
+              <% if illust.illust_image.present? %>
+                <%= link_to post_path(illust.post_id) do %>
+                  <p><%= image_tag illust.illust_image.variant(gravity: :center, resize:"200x200^", crop:"200x200+0+0").processed %></p>
                 <% end %>
+                <!--イラストの画像を探すeach文から抜ける-->
+                <% break %>
               <% end %>
-              <div class="card-body d-flex flex-column align-items-center">
-                <%= link_to post_path(post) do %>
-                  <span><%= post.title.truncate(11) %></span>
+            <% end %>
+            <div class="card-body d-flex flex-column align-items-center">
+              <%= link_to post_path(post) do %>
+                <span><%= post.title.truncate(11) %></span>
+              <% end %>
+              <div class="m-0">
+                <i class="fas fa-tags"></i>
+                <% post.tags.first(1).each do |tag| %>
+                  <%= link_to tag.name.truncate(8), search_tag_path(tag_id: tag.id) %>
+                  <%="(#{tag.posts.where(is_deleted: false).count})" %>
                 <% end %>
-                <div class="m-0">
-                  <i class="fas fa-tags"></i>
-                  <% post.tags.first(1).each do |tag| %>
-                    <%= link_to tag.name.truncate(8), search_tag_path(tag_id: tag.id) %>
-                    <%="(#{tag.posts.where(is_deleted: false).count})" %>
-                  <% end %>
-                </div>
               </div>
             </div>
-          <% end %>
+          </div>
+        <% end %>
       </div>
       <div class="row d-flex flex-column align-items-center mt-3">
         <ul class="pagination">

@@ -24,10 +24,13 @@
 
     <div class="col-7 offset-md-1">
       <%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
-
-        <div class="form-group">
-          <%= f.file_field :profile_image, accept: "image/jpg, image/jpeg, image/png", class:"img_field",  style: 'display:none;' %>
-          <%= image_tag @user.profile_image, fallback: 'no-image.jpeg', onClick: "$('.img_field').click()", class: "center-block img-thumbnail img-responsive img_prev mx-auto d-block" %>
+        <div class="row">
+          <div class="offset-sm-2 col-sm-8">
+            <div class="form-group">
+              <%= f.file_field :profile_image, accept: "image/jpg, image/jpeg, image/png", class:"img_field",  style: 'display:none;' %>
+              <%= image_tag @user.profile_image, fallback: 'no-image.jpeg', onClick: "$('.img_field').click()", class: "center-block img-thumbnail img-responsive img_prev mx-auto d-block" %>
+            </div>
+          </div>
         </div>
 
         <table class="table table-borderless text-right shadow p-3 rounded">

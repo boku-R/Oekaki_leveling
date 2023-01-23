@@ -1,5 +1,18 @@
-<div class="h2">フォロワー一覧です</div>
-
-<%= render "public/users/topbar",user: @user %>
-<%= render "public/users/sidebar",user: @user %>
-<%= render "follow_list",users: @users %>
+<div class="container-fluid background_beige py-3">
+  <div class="row">
+    <div class="mx-auto">
+      <%= render "public/users/topbar",user: @user %>
+    </div>
+  </div>
+</div>
+<div class="container-fluid py-2 background_lightbeige">
+  <div class="row mt-4">
+    <div class="col-2">
+      <%= render "public/users/sidebar",user: @user %>
+    </div>
+    <div class="col-8 offset-md-1">
+      <div class="h3">フォロワー一覧</div>
+      <%= render "follow_list",users: @users %>
+    </div>
+  </div>
+</div>

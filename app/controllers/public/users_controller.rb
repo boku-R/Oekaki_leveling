@@ -35,7 +35,7 @@ class Public::UsersController < ApplicationController
   def favorites
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:illust_id)
-    @favorite_illusts = Illust.find(favorites)
+    @favorite_illusts = Illust.where(id: favorites).page(params[:page])
   end
 
   def unsubscribe
