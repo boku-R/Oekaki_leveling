@@ -30,7 +30,7 @@
           <%= image_tag @user.profile_image, fallback: 'no-image.jpeg', onClick: "$('.img_field').click()", class: "center-block img-thumbnail img-responsive img_prev mx-auto d-block" %>
         </div>
 
-        <table class="table table-borderless text-right shadow p-3 mb-5 rounded">
+        <table class="table table-borderless text-right shadow p-3 rounded">
           <thead>
             <tr>
               <th scope="col" style="width: 20%"></th>
@@ -81,13 +81,8 @@
           </tbody>
         </table>
 
-
-
-
-
-
         <div class="col text-center">
-          <%= f.submit "　変更を保存　",class:"btn btn-light center-block"  %>
+          <%= f.submit "　変更を保存　",class:"btn btn-light center-block mb-4 shadow"  %>
         </div>
       <% end %>
     </div>
