@@ -5,8 +5,8 @@
     <% end %>
     <%= link_to "フォロー", user_followings_path(user.id), method: :get, class: "nav-item nav-link" %>
     <%= link_to "フォロワー", user_followers_path(user.id), method: :get, class: "nav-item nav-link" %>
-    <%= link_to "いいね一覧", favorites_user_path(@user), method: :get, class: "nav-item nav-link" %>
+    <%= link_to "いいね一覧", favorites_user_path(user), method: :get, class: "nav-item nav-link" %>
     <% if user.username != "guestuser" && user == current_user %>
-      <%= link_to "退会", unsubscribe_path(@user), method: :get, class: "nav-item nav-link" %>
+      <%= link_to "退会", unsubscribe_path(user), method: :get, class: "nav-item nav-link" %>
     <% end %>
   </div>

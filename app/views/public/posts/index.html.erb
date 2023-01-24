@@ -1,26 +1,63 @@
 <%= flash[:notice] %>
 
-<% @tag_list.each do |tag| %>
-  <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
-  <%="(#{tag.posts.where(is_deleted: false).count})" %>
-<% end %>
+<div class="container-fluid background_beige py-3">
+  <div class="row">
+    <div class="mx-auto">
+      <%= render "public/users/topbar",user: current_user %>
+    </div>
+  </div>
+</div>
 
-<% @posts.each do |post| %>
-  <!--完成から順にイラスト画像を探し、画像を見つけたらそれをピックアップ、探すのをやめる-->
-  <% post.illusts.reverse_each do |illust| %>
-    <% if illust.illust_image.present? %>
-      <%= link_to post_path(illust.post_id) do %>
-        <!--リサイズ→真ん中を正方形にくり抜きます-->
-        <p><%= image_tag illust.illust_image.variant(resize: "100x100").processed %></p>
-      <% end %>
-      <!--イラストの画像を探すeach文から抜ける-->
-      <% break %>
-    <% end %>
-  <% end %>
-  <i class="fas fa-tags"></i><%= post.tags.map(&:name).join(',') %>
-  <%= link_to post_path(post) do %>
-    <span><%= post.title %></span>
-  <% end %>
-<% end %>
+<div class="container-fluid py-2">
+  <div class="row mt-4">
+    <div class="col-2">
+      <%= render "public/users/sidebar",user: current_user %>
+    </div>
 
-<%= paginate @posts %>
+    <div class="col-8 offset-md-1">
+      <div class="h3">最近投稿されたイラスト</div>
+      <div class="row">
+        <% @posts.each do |post| %>
+          <% illust =  post.illusts.order(id: :desc).select{|o|o.illust_image.attached?}.first %>
+          <% if illust %>
+          image
+          <% else %>
+          no-image
+          <% end %>
+          <div class="card text-center m-1 shadow">
+            <% post.illusts.reverse_each do |illust| %>
+              <% if illust.illust_image.present? %>
+                <%= link_to post_path(illust.post_id) do %>
+                  <p class="illust_back"><%= image_tag illust.illust_image.variant(gravity: :center, resize:"200x200^", crop:"200x200+0+0").processed %></p>
+                <% end %>
+                <!--イラストの画像を探すeach文から抜ける-->
+                <% break %>
+              <% end %>
+            <% end %>
+            <%= link_to user_path(post.user) do %>
+              <p class="icon_front rounded-circle border border-thick border-light"><%= image_tag post.user.get_profile_image(100,100),class: "mr-3 rounded-circle d-block mx-auto" %></p>
+            <% end %>
+
+            <div class="card-body d-flex flex-column align-items-center mt-3 pb-0">
+              <%= link_to post_path(post) do %>
+                <span><%= post.title.truncate(11) %></span>
+              <% end %>
+              <div class="m-0">
+                <i class="fas fa-tags"></i>
+                <% post.tags.first(1).each do |tag| %>
+                  <%= link_to tag.name.truncate(8), search_tag_path(tag_id: tag.id) %>
+                  <%="(#{tag.posts.where(is_deleted: false).count})" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="row d-flex flex-column align-items-center mt-3">
+        <ul class="pagination">
+          <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
