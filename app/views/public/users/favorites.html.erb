@@ -22,7 +22,9 @@
                 <p class="illust_back"><%= image_tag illust.illust_image.variant(gravity: :center, resize:"200x200^", crop:"200x200+0+0").processed %></p>
               <% end %>
             <% end %>
-            <p class="icon_front rounded-circle border border-5"><%= image_tag illust.post.user.get_profile_image(100,100),class: "mr-3 rounded-circle d-block mx-auto" %></p>
+            <%= link_to user_path(illust.post.user) do %>
+              <p class="icon_front rounded-circle border border-thick border-light"><%= image_tag illust.post.user.get_profile_image(100,100),class: "mr-3 rounded-circle d-block mx-auto" %></p>
+            <% end %>
 
             <div class="card-body d-flex flex-column align-items-center mt-3 pb-0">
               <%= link_to post_path(illust.post) do %>
