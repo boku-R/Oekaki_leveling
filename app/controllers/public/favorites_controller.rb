@@ -2,32 +2,32 @@ class Public::FavoritesController < ApplicationController
 
   def create
     # いいねをつける機能
-    post = Post.find(params[:post_id])
-    illust = Illust.find(params[:illust_id])
-    favorite = current_user.favorites.new(illust_id: illust.id)
+    @post = Post.find(params[:post_id])
+    @illust = Illust.find(params[:illust_id])
+    favorite = current_user.favorites.new(illust_id: @illust.id)
     favorite.save
 
     # レベルを計算してuserに投入
-    user = post.user
+    user = @post.user
     level = get_level(user)
     user.update(level: level)
 
-    redirect_to post_path(post)
+    # redirect_to post_path(post)
   end
 
   def destroy
     # いいねをつける機能
-    post = Post.find(params[:post_id])
-    illust = Illust.find(params[:illust_id])
-    favorite = current_user.favorites.find_by(illust_id: illust.id)
+    @post = Post.find(params[:post_id])
+    @illust = Illust.find(params[:illust_id])
+    favorite = current_user.favorites.find_by(illust_id: @illust.id)
     favorite.destroy
 
     # レベルを計算してuserに投入
-    user = post.user
+    user = @post.user
     level = get_level(user)
     user.update(level: level)
 
-    redirect_to post_path(post)
+    # redirect_to post_path(post)
   end
 
   private
