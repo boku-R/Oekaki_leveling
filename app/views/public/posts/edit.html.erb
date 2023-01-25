@@ -1,34 +1,27 @@
-<% if @post.errors.any? %>
-  <p><%= @post.errors.count %>errors prohibited this obj from being saved:</p>
-  <ul>
-    <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<h2>編集ページです</h2>
-
-<%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
-
-  <p>タイトル</p>
-  <%= f.text_field :title, required: true %>
-
-  <p>説明</p>
-  <%= f.text_area :introduction %>
-
-  <div class = "field">
-    <%= f.label "タグ (半角スペースで区切ると複数タグ登録できます)※全角スペースはだめです" %>
-    <%= f.text_field :name, value: @tag_list, class: "form-control" %>
+<div class="container-fluid background_beige py-3">
+  <div class="row">
+    <div class="mx-auto">
+      <%= render "public/users/topbar",user: current_user %>
+    </div>
   </div>
+</div>
 
-  <%= f.fields_for :illusts do |i| %>
-    <p>イラスト</p>
-    <%= i.file_field :illust_image, accept: "image/jpg,image/png,image/jpeg" %>
-    <!--上から順に、イラストの種類(illust.step)をhidden_fieldで投入-->
-    <%= i.hidden_field :step, value: Illust.steps.keys[@illust_step] %>　step:<%= I18n.t("enums.illust.step.#{Illust.steps.keys[@illust_step]}") %>
-    <% @illust_step = @illust_step + 1 %>
-  <% end %>
-
-  <p><%= f.submit '投稿する',class:"btn btn-success" %></p>
-<% end %>
+<div class="container-fluid py-2">
+  <div class="row mt-4">
+    <%= flash[:notice] %>
+    <% if @post.errors.any? %>
+      <p><%= @post.errors.count %>errors prohibited this obj from being saved:</p>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <div class="col-2">
+      <%= render "public/users/sidebar",user: current_user %>
+    </div>
+      <div class="col-7 offset-md-1">
+      <%= render "post", title: "投稿編集", post: @post, illust_step: @illust_step, tag_list: @tag_list %>
+    </div>
+  </div>
+</div>

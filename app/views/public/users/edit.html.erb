@@ -27,8 +27,10 @@
         <div class="row">
           <div class="offset-sm-2 col-sm-8">
             <div class="form-group">
+              <div class="card text-center m-1 shadow">
               <%= f.file_field :profile_image, accept: "image/jpg, image/jpeg, image/png", class:"img_field",  style: 'display:none;' %>
               <%= image_tag @user.profile_image, fallback: 'no_image.jpeg', onClick: "$('.img_field').click()", class: "center-block img-thumbnail img-responsive img_prev mx-auto d-block" %>
+              </div>
             </div>
           </div>
         </div>

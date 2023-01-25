@@ -1,5 +1,5 @@
-<%= flash[:notice] %>
 <div class="container-fluid background_beige py-3">
+  <%= flash[:notice] %>
   <div class="row">
     <div class="mx-auto">
       <%= render "public/users/topbar",user: @user %>
@@ -9,92 +9,110 @@
 
 <div class="container-fluid py-2">
   <div class="row mt-4">
-    <%= flash[:notice] %>
     <div class="col-2">
       <%= render "public/users/sidebar",user: @user %>
     </div>
-      <div class="col-7 offset-md-1">
-        <h2>作品の詳細ページです</h2>
+    <div class="col-7 offset-md-1">
+      <div class="h2 pb-2"><%= @post.title %></div>
+      <div class="h5 pb-2"><%= @post.introduction %></div>
 
-  【タイトル：<%= @post.title %>】
-  【説明：<%= @post.introduction %>】
-  【タグ：
-    <% @post_tags.each do |tag| %>
-      <%= link_to tag.name, search_tag_path(tag_id: tag.id) %><%= "(#{tag.posts.count})" %>
-    <% end %>
-    】
-  <% if @post.user == current_user && current_user.present? %>
-    <%= link_to "投稿を編集する", edit_post_path(params[:id]), method: :get, class:"btn btn-secondary" %>
-    <%= link_to "投稿を削除", post_path(@post), method: :delete, class:"btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
-  <% end %>
+      <i class="fas fa-tags"></i>
+      <% @post_tags.each do |tag| %>
+        <%= link_to tag.name, search_tag_path(tag_id: tag.id) %><%= "(#{tag.posts.count})" %>
+      <% end %>
+
+      <% if @post.user == current_user && current_user.present? %>
+        <div class="float-right">
+          <%= link_to "投稿を編集する", edit_post_path(params[:id]), method: :get, class:"btn btn-secondary" %>
+          <%= link_to "投稿を削除", post_path(@post), method: :delete, class:"btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
+        </div>
+      <% end %>
 
     <table class="table table-borderless table-hover">
       <tbody>
-      <% @post.illusts.each do |illust| %>
-        <tr>
-          <th>
-            <div class="card text-center m-1 shadow">
-              <!--イラストの作成段階-->
-              <div class="card-header p-1 h4"><%= I18n.t("enums.illust.step.#{Illust.steps.keys[Illust.steps[illust.step]]}") %></div>
-              <% if illust.illust_image.present? %>
-                <p><%= image_tag illust.illust_image ,class: "center-block img-thumbnail img-responsive mx-auto d-block" %></p>
-              <% else %>
-                <%= image_tag image_url('no_pictureimage'),size:'300x300',class: "center-block img-thumbnail img-responsive mx-auto d-block" %>
-              <% end %>
-              <div class="card-body d-flex flex-column align-items-center p-0">
-                <% if illust.illust_image.present? && current_user.present? %>
-                  <% if illust.favorited_by?(current_user) %>
-                    <p>
-                      <%= link_to post_favorites_path(@post,illust_id: illust.id), method: :delete do %>
-                        <div class="h3 text-danger">♥<%= illust.favorites.count %></div>
-                      <% end %>
-                    </p>
-                  <% else %>
-                    <p>
-                      <%= link_to post_favorites_path(@post,illust_id: illust.id), method: :post do %>
-                        <div class="h3 text-danger">♡<%= illust.favorites.count %></div>
-                      <% end %>
-                    </p>
-                  <% end %>
+        <% @post.illusts.each do |illust| %>
+          <tr>
+            <th>
+              <div class="card text-center m-1 shadow">
+                <!--イラストの作成段階-->
+                <div class="card-header p-1 h4"><%= I18n.t("enums.illust.step.#{Illust.steps.keys[Illust.steps[illust.step]]}") %></div>
+                <% if illust.illust_image.present? %>
+                  <p><%= image_tag illust.illust_image ,class: "center-block img-thumbnail img-responsive mx-auto d-block" %></p>
+                <% else %>
+                  <%= image_tag image_url('no_pictureimage'),size:'300x300',class: "center-block img-thumbnail img-responsive mx-auto d-block" %>
                 <% end %>
+                <div class="card-body d-flex flex-column align-items-center p-0">
+                  <% if illust.illust_image.present? && current_user.present? %>
+                    <% if illust.favorited_by?(current_user) %>
+                      <p>
+                        <%= link_to post_favorites_path(@post,illust_id: illust.id), method: :delete do %>
+                          <div class="h3 text-danger">♥<%= illust.favorites.count %></div>
+                        <% end %>
+                      </p>
+                    <% else %>
+                      <p>
+                        <%= link_to post_favorites_path(@post,illust_id: illust.id), method: :post do %>
+                          <div class="h3 text-danger">♡<%= illust.favorites.count %></div>
+                        <% end %>
+                      </p>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
-            </div>
-          </th>
-        </tr>
-      <% end %>
-      <tr>
-        <th>
-          <p>コメント件数：<%= @post.post_comments.count %></p>
-        </th>
-      </tr>
-      <% @post.post_comments.each do |post_comment| %>
-        <tr>
-          <th>
-            <% if post_comment.is_deleted == false %>
-              <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-              <%= post_comment.user.username %>
-              <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-              <% if post_comment.user == current_user %>
-                <%= link_to "コメント削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
-              <% end %>
-            <% else %>
-              <p>(コメントは削除されました)</p>
-            <% end %>
-          </th>
-        </tr>
-      <% end %>
-      <tr>
-        <th>
-          <div class="form-group">
-            <%= form_with model: [@post, @post_comment] do |f| %>
-              <%= f.text_area :comment, class: "form-control", placeholder: "コメント入力欄", required: true %>
-              <%= f.submit "送信する", class:"btn btn-secondary center-block mt-2 shadow" %>
-            <% end %>
-          </div>
-        </th>
-      </tr>
+            </th>
+          </tr>
+        <% end %>
       </tbody>
     </table>
+
+    <p class="text-right">コメント：<%= @post.post_comments.where(is_deleted: false).count %>件</p>
+
+    <table class="table table-borderless table-hover">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 10%"></th>
+          <th scope="col" style="width: 20%"></th>
+          <th scope="col" style="width: 40%"></th>
+          <th scope="col" style="width: 30%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @post.post_comments.each do |post_comment| %>
+          <tr>
+              <% if post_comment.is_deleted == false %>
+                <td>
+                  <%= link_to user_path(post_comment.user), method: :get do %>
+                    <%= image_tag post_comment.user.get_profile_image(100,100),class: "mr-3 rounded-circle mx-auto" %>
+                  <% end %>
+                </td>
+                <td class="align-middle">
+                  <p class="h5"><%= post_comment.user.handlename %></p> @<%= post_comment.user.username %> <br><i class="fas fa-palette"></i> Lv.<%= post_comment.user.level %><br><%= post_comment.created_at.strftime('%Y/%m/%d') %>
+                </td>
+                <td class="align-middle">
+                  <%= post_comment.comment %>
+                </td>
+
+                <% if post_comment.user == current_user %>
+                  <td class="align-middle">
+                    <%= link_to "コメント削除", post_post_comment_path(post_comment.post, post_comment), method: :delet, class:"btn btn-danger" %>
+                  </td>
+                <% end %>
+              <% else %>
+                <td></td>
+                <td></td>
+                <td class="align-middle">(コメントは削除されました)</td>
+                <td></td>
+              <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="form-group">
+        <%= form_with model: [@post, @post_comment] do |f| %>
+          <%= f.text_area :comment, class: "form-control", placeholder: "コメント入力欄", required: true %>
+          <%= f.submit "送信する", class:"btn btn-secondary center-block mt-2 shadow" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

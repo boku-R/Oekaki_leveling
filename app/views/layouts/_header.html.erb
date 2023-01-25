@@ -1,45 +1,49 @@
 <header class="sticky-top background_yellow">
-  <nav class="navbar navbar-yellow">
-    <%= link_to root_path, method: :get do %>
-      <%= image_tag image_url('Oekaki_icon.png'), size: "60x60" %>
-    <% end %>
+    <nav class="navbar">
+        <ul class="mx-auto">
+          <%= link_to root_path, method: :get do %>
+            <%= image_tag image_url('Oekaki_icon.png'), size: "60x60" %>
+          <% end %>
+        </ul>
+      </div>
 
     <!--ユーザがサインインした場合-->
     <% if user_signed_in? %>
-      <ul class="nav justify-content-end">
-        <li class="nav-item ">
-          <%= link_to user_path(current_user), method: :get do %>
-            <%= image_tag current_user.get_profile_image(41,41), class: "mr-3 rounded-circle d-block mx-auto shadow" %>
-          <% end %>
-          <%= link_to "マイページ", user_path(current_user), method: :get, class: "nav-link small-text pt-0" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to new_post_path, method: :get do %>
-            <i class="fas fa-upload d-block mx-auto h2"></i>
-          <% end %>
-          <%= link_to "作品投稿", new_post_path, method: :get, class: "nav-link small-text pt-0" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to posts_path, method: :get do %>
-            <i class="fas fa-images d-block mx-auto h2"></i>
+        <ul class="nav justify-content-end mx-auto">
+          <li class="nav-item">
+            <%= link_to user_path(current_user), method: :get do %>
+              <%= image_tag current_user.get_profile_image(41,41), class: "mr-3 rounded-circle d-block mx-auto shadow" %>
             <% end %>
-          <%= link_to "作品一覧", posts_path, method: :get, class: "nav-link small-text pt-0" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to destroy_user_session_path, method: :delete do %>
-            <i class="fas fa-sign-out-alt d-block mx-auto h2"></i>
-          <% end %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link small-text pt-0" %>
-        </li>
-      </ul>
-      <ul>
-        <%= render "layouts/search" %>
-      </ul>
+            <%= link_to "マイページ", user_path(current_user), method: :get, class: "nav-link small-text pt-0" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_post_path, method: :get do %>
+              <i class="fas fa-upload d-block mx-auto h2"></i>
+            <% end %>
+            <%= link_to "作品投稿", new_post_path, method: :get, class: "nav-link small-text pt-0" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to posts_path, method: :get do %>
+              <i class="fas fa-images d-block mx-auto h2"></i>
+              <% end %>
+            <%= link_to "作品一覧", posts_path, method: :get, class: "nav-link small-text pt-0" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to destroy_user_session_path, method: :delete do %>
+              <i class="fas fa-sign-out-alt d-block mx-auto h2"></i>
+            <% end %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link small-text pt-0" %>
+          </li>
+        </ul>
+        <ul class="form-inline mx-auto">
+          <%= render "layouts/search" %>
+        </ul>
+
 
       <!--＜管理者がログインした場合＞-->
     <% elsif admin_signed_in? %>
       <span>管理者でログインしています</span>
-      <ul class="nav justify-content-end">
+      <ul class="nav justify-content-end mx-auto">
         <li class="nav-item">
           <%= link_to "ユーザ一覧", admin_users_path, method: :get, class: "nav-link" %>
         </li>
@@ -50,24 +54,33 @@
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
         </li>
       </ul>
-      <ul>
+      <ul class="form-inline mx-auto">
         <%= render "layouts/search" %>
       </ul>
 
       <!--＜サインインしていない場合＞-->
     <% else %>
-      <ul class="nav justify-content-end">
+      <ul class="nav justify-content-end mx-auto">
         <li class="nav-item">
-          <%= link_to "About", about_path, class: "nav-link" %>
+          <%= link_to about_path do %>
+            <i class="fas fa-question d-block mx-auto h2"></i>
+          <% end %>
+          <%= link_to "About", about_path, class: "nav-link small-text pt-0"  %>
         </li>
         <li class="nav-item">
-          <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+          <%= link_to new_user_registration_path do %>
+            <i class="fas fa-user-plus d-block mx-auto h2"></i>
+          <% end %>
+          <%= link_to "新規登録", new_user_registration_path, class: "nav-link small-text pt-0" %>
         </li>
         <li class="nav-item">
-          <%= link_to "ログイン", user_session_path, class: "nav-link" %>
+          <%= link_to user_session_path do %>
+            <i class="fas fa-sign-in-alt d-block mx-auto h2"></i>
+          <% end %>
+          <%= link_to "ログイン", user_session_path, class: "nav-link small-text pt-0" %>
         </li>
       </ul>
     <% end %>
 
-  </nav>
+    </nav>
 </header>
