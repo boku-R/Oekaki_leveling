@@ -7,7 +7,7 @@ class Public::FavoritesController < ApplicationController
     favorite = current_user.favorites.new(illust_id: illust.id)
     favorite.save
 
-    # レベルを計算して投入
+    # レベルを計算してuserに投入
     user = post.user
     level = get_level(user)
     user.update(level: level)
@@ -22,7 +22,7 @@ class Public::FavoritesController < ApplicationController
     favorite = current_user.favorites.find_by(illust_id: illust.id)
     favorite.destroy
 
-    # レベルを計算して投入
+    # レベルを計算してuserに投入
     user = post.user
     level = get_level(user)
     user.update(level: level)

@@ -1,0 +1,13 @@
+<% if illust.favorited_by?(current_user) %>
+  <p>
+    <%= link_to post_favorites_path(post,illust_id: illust.id), method: :delete, remote: true do %>
+      <div class="h3 text-danger">♥<%= illust.favorites.count %></div>
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to post_favorites_path(post,illust_id: illust.id), method: :post, remote: true do %>
+      <div class="h3 text-danger">♡<%= illust.favorites.count %></div>
+    <% end %>
+  </p>
+<% end %>

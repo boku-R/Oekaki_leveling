@@ -43,19 +43,9 @@
                 <% end %>
                 <div class="card-body d-flex flex-column align-items-center p-0">
                   <% if illust.illust_image.present? && current_user.present? %>
-                    <% if illust.favorited_by?(current_user) %>
-                      <p>
-                        <%= link_to post_favorites_path(@post,illust_id: illust.id), method: :delete do %>
-                          <div class="h3 text-danger">♥<%= illust.favorites.count %></div>
-                        <% end %>
-                      </p>
-                    <% else %>
-                      <p>
-                        <%= link_to post_favorites_path(@post,illust_id: illust.id), method: :post do %>
-                          <div class="h3 text-danger">♡<%= illust.favorites.count %></div>
-                        <% end %>
-                      </p>
-                    <% end %>
+                    <div id="favorite_buttons_<%= illust.id %>" >
+                      <%= render "public/favorites/favorites", post: @post, illust: illust %>
+                    </div>
                   <% end %>
                 </div>
               </div>
