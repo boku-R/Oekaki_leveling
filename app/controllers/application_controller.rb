@@ -6,11 +6,6 @@ class ApplicationController < ActionController::Base
   # deviseによる会員登録にて、ユーザ名とハンドルネームを登録させる
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-
-  def after_sign_in_path_for(resource)
-    about_path
-  end
-
   protected
 
   def configure_permitted_parameters

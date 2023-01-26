@@ -1,41 +1,85 @@
-<%= flash[:notice] %>
-<h2>新規登録</h2>
+<div class="container-fluid py-3">
+  <div class="row">
+    <div class="col-6 offset-md-3 mx-auto">
+      <%= flash[:alert] %>
+      <%= render "public/shared/error_messages", resource: resource %>
+      <div class="h4"><i class="fas fa-user-plus"></i> 新規登録</div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :username, "ユーザ名" %><br>
-    <%= f.text_field :username, required: true %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <table class="table table-borderless text-right shadow p-3 rounded">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 30%"></th>
+              <th scope="col" style="width: 70%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="align-middle">
+                <p>ユーザ名(半角英数字)</p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control", required: true %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="align-middle">
+                <p>ハンドル名(全角も可)</p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.text_field :handlename, required: true, class: "form-control" %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="align-middle">
+                <p>Eメール</p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "form-control" %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  パスワード
+                  <% if @minimum_password_length %>
+                    <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+                  <% end %>
+                </p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control" %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  パスワード(確認用)
+                </p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control" %>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="actions d-flex justify-content-center">
+          <%= f.submit "新規登録する", class:"btn btn-secondary" %>
+        </div>
+      <% end %>
+
+      <p class="text-right pt-4">アカウントをお持ちの方は<%= link_to "こちら", user_session_path, class:"h5" %></p>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :handlename, "ハンドル名" %><br>
-    <%= f.text_field :handlename, required: true %>
-  </div>
-
-  <div class="field
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", required: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "新規作成", class:"btn btn-success" %>
-  </div>
-<% end %>
-
-<%#= render "public/shared/links"  %>
-<%= link_to "アカウントをお持ちの方はこちら", user_session_path %>
+</div>

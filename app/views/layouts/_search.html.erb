@@ -4,7 +4,7 @@
       <div class="form-group">
         <%= f.text_field :word, class: "form-control" %>
         <%= f.select :range, options_for_select([['ユーザを検索する'], ['投稿を検索する'], ['タグを検索する']]), class: "form-control" %>
-        <%= f.submit "検索", class: "btn btn-primary" %>
+        <%= f.submit "検索", class: "btn btn-secondary" %>
       </div>
     <% end %>
   </div>
@@ -14,7 +14,7 @@
       <div class="form-group">
         <%= f.text_field :word %>
         <%= f.select :range, options_for_select([['ユーザを検索する'], ['投稿を検索する'], ['タグを検索する']]) %>
-        <%= f.submit "検索", class: "btn btn-primary" %>
+        <%= f.submit "検索", class: "btn btn-secondary" %>
       </div>
     <% end %>
   </div>

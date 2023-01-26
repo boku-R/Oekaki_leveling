@@ -1,7 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :ensure_deleted_post, only: [:show, :edit]
-  # ログインしていない状態にて特定のアクション以外を制限する
-  before_action :authenticate_user!, except: [:index, :show, :search_tag]
+  # ログインしていない状態のアクセスを制限する
+  before_action :authenticate_user!
 
   def new
     @post = Post.new
