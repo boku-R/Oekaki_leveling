@@ -12,22 +12,13 @@
     </div>
     <div class="col-8 offset-md-1">
       <div class="h2">検索結果</div>
-
-        <% if @range == "ユーザを検索する" %>
-          <%= render "public/users/index",users: @users %>
-        <% elsif @range == "投稿を検索する" %>
-          <%= render "public/posts/index",title: "",posts: @posts %>
-        <% elsif @range == "タグを検索する" %>
-          <!--タグの一覧表示-->
-          <% @tags.each do |tag| %>
-            <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
-            <!--削除された記事のタグをカウントしないようにする-->
-            <%="(#{tag.posts.where(is_deleted: false).count})" %>
-          <% end %>
-          <%= paginate @tags %>
-        <% end %>
-
-
+      <% if @range == "ユーザを検索する" %>
+        <%= render "public/users/index",users: @users %>
+      <% elsif @range == "投稿を検索する" %>
+        <%= render "public/posts/index",title: "",posts: @posts %>
+      <% elsif @range == "タグを検索する" %>
+        <%= render "public/posts/tag_lists",tags: @tags %>
+      <% end %>
     </div>
   </div>
 </div>

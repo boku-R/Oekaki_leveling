@@ -1,31 +1,31 @@
-<div class="container">
-<h5>タグが<%= @tag.name %>の投稿一覧</h5>
-
-<!--タグリスト-->
-<% @tag_list.each do |tag|%>
-  <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
-  <!--削除された記事のタグをカウントしないようにする-->
-  <%= "(#{tag.posts.where(is_deleted: false).count})" %>
-<% end %>
-
-<% @posts.each do |post| %>
-  <!--投稿はカードで囲む-->
-  <div class = "card" >
-    <div class = "card-body" >
-      <h6 class ="card-title" >
-        <%= link_to post_path(post.id) do %>
-          <!--完成から順にイラスト画像を探し、画像を見つけたらそれをピックアップ、探すのをやめる-->
-          <% post.illusts.reverse_each do |illust| %>
-            <% if illust.illust_image.present? %>
-              <p><%= image_tag illust.illust_image.variant(resize: "100x100").processed %></p>
-              <!--イラストの画像を探すeach文から抜ける-->
-              <% break %>
-            <% end %>
-          <% end %>
-          <!--タイトル表示される文字数は２５文字までにしてます-->
-          <%= post.title.truncate(25) %>
-        <% end %>
-      </h6>
+<div class="container-fluid background_beige py-3">
+  <div class="row">
+    <div class="mx-auto">
+      <%= render "public/users/topbar",user: current_user %>
     </div>
   </div>
-<% end %>
+</div>
+
+<div class="container-fluid py-2">
+  <div class="row mt-4">
+    <div class="col-2">
+      <%= render "public/users/sidebar",user: current_user %>
+    </div>
+    <div class="col-8 offset-md-1">
+      <div class="row">
+        <div class="h4"><i class="fas fa-tags"></i><%= @tag.name %> の投稿一覧</div>
+      </div>
+      <p class="pt-2 m-0">最近のタグ</p>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb shadow">
+          <% @tag_list.each do |tag| %>
+            <li class="breadcrumb-item"><i class="fas fa-tags"></i><%= link_to tag.name, search_tag_path(tag_id: tag.id) %><%="(#{tag.posts.where(is_deleted: false).count})" %></li>
+          <% end %>
+        </ol>
+      </nav>
+      <%= render "index",title: "",posts: @posts %>
+    </div>
+  </div>
+</div>
+
+

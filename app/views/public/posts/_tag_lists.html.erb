@@ -1,0 +1,12 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow">
+    <% tags.each do |tag| %>
+      <li class="breadcrumb-item"><i class="fas fa-tags"></i><%= link_to tag.name, search_tag_path(tag_id: tag.id) %><%="(#{tag.posts.where(is_deleted: false).count})" %></li>
+    <% end %>
+  </ol>
+</nav>
+<div class="row d-flex flex-column align-items-center mt-3">
+  <ul class="pagination">
+    <%= paginate tags, theme: 'twitter-bootstrap-4' %>
+  </ul>
+</div>

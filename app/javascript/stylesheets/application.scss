@@ -97,3 +97,8 @@ main{
 .small-text{
   font-size: 7px;
 }
+
+// tag一覧表示のパンくずリストの背景色を透明に
+.breadcrumb {
+  background: transparent;
+}
