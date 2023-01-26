@@ -46,11 +46,11 @@
               </td>
             </tr>
             <tr>
-              <td>
+              <td class="align-middle">
                 <p>
                   パスワード
                   <% if @minimum_password_length %>
-                    <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+                  <%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %>
                   <% end %>
                 </p>
               </td>
@@ -61,9 +61,9 @@
               </td>
             </tr>
             <tr>
-              <td>
+              <td class="align-middle">
                 <p>
-                  パスワード(確認用)
+                  パスワード（確認用）
                 </p>
               </td>
               <td>

@@ -1,7 +1,7 @@
 class Admin::SearchesController < ApplicationController
-    before_action :authenticate_admin!
+  before_action :authenticate_admin!
 
-    def search
+  def search
     @range = params[:range]
 
     if @range == "ユーザを検索する"

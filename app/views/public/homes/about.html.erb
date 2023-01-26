@@ -1,8 +1,5 @@
 <%= flash[:notice] %>
 
-
-
-
 <div class="container-fluid background_beige py-3">
   <div class="row">
     <div class="col-6 offset-md-3 mx-auto">
@@ -24,27 +21,25 @@
 
 <div class="container-fluid py-4">
   <div class="row">
-      <div class="col-4 offset-md-4 shadow">
-        <% if !current_user.present? && !current_admin.present? %>
-          <table class="table table-borderless p-3 rounded">
-            <tbody>
-              <tr>
-                <p class="text-center pt-4 mb-1">試しに使ってみる</p>
-                <div class="p-0"><%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-outline-secondary btn-sm btn-block", method: :post %></div>
-              </tr>
-              <tr>
-                <p class="text-center pt-4 mb-1">新しく始めてみる</p>
-                <p><%= link_to '新規登録', new_user_registration_path, class: "btn btn-secondary btn-sm btn-block" %></p>
-              </tr>
-              <tr>
-                <p class="text-center pt-3 mb-1">すでにアカウントをお持ちの方</p>
-                <p><%= link_to 'ログインする', user_session_path, class: "btn btn-light btn-sm btn-block" %></p>
-              </tr>
-            </tbody>
-          </table>
-        <% end %>
-
-
+    <div class="col-4 offset-md-4 shadow">
+      <% if !current_user.present? && !current_admin.present? %>
+        <table class="table table-borderless p-3 rounded">
+          <tbody>
+            <tr>
+              <p class="text-center pt-4 mb-1">試しに使ってみる</p>
+              <div class="p-0"><%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-outline-secondary btn-sm btn-block", method: :post %></div>
+            </tr>
+            <tr>
+              <p class="text-center pt-4 mb-1">新しく始めてみる</p>
+              <p><%= link_to '新規登録', new_user_registration_path, class: "btn btn-secondary btn-sm btn-block" %></p>
+            </tr>
+            <tr>
+              <p class="text-center pt-5 mb-1">すでにアカウントをお持ちの方</p>
+              <p><%= link_to 'ログインする', user_session_path, class: "btn btn-light btn-sm btn-block" %></p>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
     </div>
   </div>
 </div>

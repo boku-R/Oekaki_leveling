@@ -30,8 +30,12 @@
     </div>
   <% end %>
 </div>
-<div class="row d-flex flex-column align-items-center mt-3">
-  <ul class="pagination">
-    <%= paginate posts, theme: 'twitter-bootstrap-4' %>
-  </ul>
-</div>
+
+<!--トップページにいる時だけ無効化する-->
+<% if !current_page?(root_path) %>
+  <div class="row d-flex flex-column align-items-center mt-3">
+    <ul class="pagination">
+      <%= paginate posts, theme: 'twitter-bootstrap-4' %>
+    </ul>
+  </div>
+<% end %>
