@@ -34,8 +34,10 @@ class Public::UsersController < ApplicationController
 
   def favorites
     @user = User.find(params[:id])
+    # ユーザがいいねしたイラストのIDを「favorites」インスタンスに格納
     favorites = Favorite.where(user_id: @user.id).pluck(:illust_id)
-    @favorite_illusts = Illust.where(id: favorites).page(params[:page])
+    # 対応するPostが論理削除されていない、かつidが上記の「favorites」を探し出している
+    @favorite_illusts = Illust.joins(:post).where(id: favorites, posts: { is_deleted: false }).page(params[:page])
   end
 
   def unsubscribe
