@@ -9,8 +9,7 @@ class Admin::SearchesController < ApplicationController
     elsif @range == "投稿を検索する"
       @posts = Post.looks(params[:word]).page(params[:page])
     elsif @range == "タグを検索する"
-      # 検索結果画面でタグ一覧表示
-      @tags = Tag.looks(params[:word]).page(params[:page])
+      @tags = Tag.looks(params[:word]).page(params[:page]).per(20)
     end
   end
 

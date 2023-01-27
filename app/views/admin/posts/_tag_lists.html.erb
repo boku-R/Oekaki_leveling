@@ -1,0 +1,17 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow">
+    <% tags.each do |tag| %>
+      <li class="breadcrumb-item">
+        <i class="fas fa-tags"></i>
+        <%= link_to tag.name, admin_search_tag_path(tag_id: tag.id) %>
+        (<div class="text-success"><%="#{tag.posts.where(is_deleted: false).count}" %></div>)
+        (<div class="text-danger"><%= "#{tag.posts.where(is_deleted: true).count}" %></div>)
+      </li>
+    <% end %>
+  </ol>
+</nav>
+<div class="row d-flex flex-column align-items-center mt-3">
+  <ul class="pagination">
+    <%= paginate tags, theme: 'twitter-bootstrap-4' %>
+  </ul>
+</div>

@@ -1,73 +1,14 @@
-<div class="h2">検索結果</div>
-
-<table class="table table-hover table-inverse">
-  <!--検索対象モデルがUserの時 -->
-  <% if @range == "ユーザを検索する" %>
-    <thead>
-      <tr>
-        <td></td>
-        <td>ユーザ名</td>
-        <td>ハンドルネーム</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td>
-            <%= link_to admin_user_path(user) do %>
-              <%= image_tag user.get_profile_image(100,100) %>
-            <% end %>
-          </td>
-          <td><%= user.username %></td>
-          <td><%= user.handlename %></td>
-          <% if user.is_deleted == true %>
-            <td>退会済み</td>
-          <% end %>
-        </tr>
+<div class="container-fluid py-2 background_lightbeige">
+  <div class="row mt-4">
+    <div class="col-8 offset-md-2">
+      <div class="h2">検索結果</div>
+      <% if @range == "ユーザを検索する" %>
+        <%= render "admin/users/index", users: @users %>
+      <% elsif @range == "投稿を検索する" %>
+        <%= render "admin/posts/index", title: "",posts: @posts %>
+      <% elsif @range == "タグを検索する" %>
+        <%= render "admin/posts/tag_lists", tags: @tags %>
       <% end %>
-    </tbody>
-    <%= paginate @users %>
-  <% elsif @range == "投稿を検索する" %>
-    <!--検索対象モデルがPostの時 -->
-    <thead>
-      <tr>
-        <td></td>
-        <td>タイトル名</td>
-        <td>説明</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% @posts.each do |post| %>
-
-          <tr>
-            <td>
-              <% post.illusts.reverse_each do |illust| %>
-                <% if illust.illust_image.present? %>
-                  <%= link_to admin_post_path(illust.post_id) do %>
-                    <!--リサイズ→真ん中を正方形にくり抜きます-->
-                    <p><%= image_tag illust.illust_image.variant(resize: "150x150", gravity: "center", crop: "100x100+0+0") %></p>
-                  <% end %>
-                  <!--イラストの画像を探すeach文から抜ける-->
-                  <% break %>
-                <% end %>
-              <% end %>
-            </td>
-            <td><%= post.title %></td>
-            <td><%= post.introduction %></td>
-            <% if post.is_deleted == true %>
-              <td>削除済み</td>
-            <% end %>
-          </tr>
-      <% end %>
-    </tbody>
-    <%= paginate @posts %>
-  <% elsif @range == "タグを検索する" %>
-    <!--タグの一覧表示-->
-    <% @tags.each do |tag| %>
-      <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
-      <!--削除された記事のタグをカウントしないようにする-->
-      <%="(#{tag.posts.where(is_deleted: false).count})(#{tag.posts.where(is_deleted: true).count})" %>
-    <% end %>
-    <%= paginate @tags %>
-  <% end %>
-</table>
+    </div>
+  </div>
+</div>
