@@ -40,7 +40,7 @@ class Admin::PostsController < ApplicationController
   # タグ検索
   def search_tag
     # すべてのタグを格納
-    @tag_list = Tag.all
+    @tag_list = Tag.all.order(id: :desc).limit(15)
     # リンクを押されたタグを受け取る
     @tag = Tag.find(params[:tag_id])
     # 検索されたタグに紐づく投稿を表示

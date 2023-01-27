@@ -4,19 +4,19 @@
     <div class="card text-center m-1 shadow">
       <!--イラストをIDが大きい方から見ていき、画像が投稿されていたらそれを表示-->
       <% illust =  post.illusts.order(id: :desc).select{|o|o.illust_image.attached?}.first %>
-      <%= link_to post_path(post) do %>
+      <%= link_to admin_post_path(post) do %>
         <% if illust %>
           <%= image_tag illust.illust_image.variant(gravity: :center, resize:"200x200^", crop:"200x200+0+0").processed %>
         <% else %>
           <%= image_tag 'no_pictureimage.png',size:"200x200" %>
         <% end %>
       <% end %>
-      <%= link_to user_path(post.user) do %>
+      <%= link_to admin_user_path(post.user) do %>
         <p class="icon_front rounded-circle"><%= image_tag post.user.get_profile_image(100,100),class: "mr-3 rounded-circle d-block mx-auto" %></p>
       <% end %>
 
       <div class="card-body d-flex flex-column mt-5 pb-0">
-        <%= link_to post_path(post) do %>
+        <%= link_to admin_post_path(post) do %>
           <span><%= post.title.truncate(11) %></span>
         <% end %>
 
