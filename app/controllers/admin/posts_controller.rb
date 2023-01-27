@@ -39,12 +39,12 @@ class Admin::PostsController < ApplicationController
 
   # タグ検索
   def search_tag
-    # 検索結果画面でタグ一覧表示（投稿に紐づいていない、また紐づいた投稿が削除されたタグを除外）
-    @tag_list = Tag.using_tags
+    # すべてのタグを格納
+    @tag_list = Tag.all
     # リンクを押されたタグを受け取る
     @tag = Tag.find(params[:tag_id])
     # 検索されたタグに紐づく投稿を表示
-    @posts = @tag.posts.where(is_deleted: false)
+    @posts = @tag.posts.page(params[:page])
   end
 
   private

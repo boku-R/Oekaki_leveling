@@ -25,11 +25,11 @@ class Admin::UsersController < ApplicationController
       end
       # フラッシュメッセージを設定
       flash[:notice] = "ユーザ情報は編集されました"
-      render :edit
+      redirect_to admin_user_path(@user)
     else
       @user.profile_image.blob = User.find(params[:id]).profile_image.blob
       flash[:notice] = "ユーザ情報を編集できませんでした"
-      render :edit
+      redirect_to admin_user_path(@user)
     end
   end
 

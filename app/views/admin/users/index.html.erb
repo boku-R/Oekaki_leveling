@@ -19,13 +19,9 @@
           </thead>
           <tbody>
             <% @users.each do |user| %>
-              <% if user.is_deleted == false %>
-                <tr>
-              <% else %>
-                <tr class="table-secondary">
-              <% end %>
+              <tr>
                 <td>
-                  <%= link_to user_path(user.id), method: :get do %>
+                  <%= link_to admin_user_path(user.id), method: :get do %>
                     <%= image_tag user.get_profile_image(100,100),class: "mr-3 rounded-circle mx-auto" %>
                   <% end %>
                 </td>
@@ -34,9 +30,9 @@
                 <td class="align-middle"><%= user.posts.count %></td>
                 <td class="align-middle">
                   <% if user.is_deleted == true %>
-                    退会済み
+                    <div class="text-danger">退会済み</div>
                   <% else %>
-                    有効
+                    <div class="text-success">有効</div>
                   <% end %>
                 </td>
                 <td class="align-middle"><%= link_to "編集する", edit_admin_user_path(user.id) , class: "btn btn-secondary" %></td>

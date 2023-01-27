@@ -1,32 +1,94 @@
-<%= flash[:notice] %>
-
-<div class="h2">管理者によるユーザ編集画面です</div>
-
-<%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
-  <p>アイコン画像</p>
-
-  <%= f.file_field :profile_image, accept: "image/jpg, image/jpeg, image/png" %>
-
-  <p>メールアドレス</p>
-  <%= f.text_field :email, size:"40" %>
-
-  <p>ユーザ名</p>
-  <%= f.text_field :username, size:"40" %>
-
-  <p>ハンドルネーム</p>
-  <%= f.text_field :handlename,size:"40" %>
-
-  <p>パスワード（実装予定）</p>
-  <%#= f.text_field :password, size:"40" %>
-
-  <p>退会フラグ</p>
-  <% if @user.is_deleted == false %>
-    <%= f.radio_button :is_deleted, false, checked:true, class:"text-success" %>有効　<%= f.radio_button :is_deleted, true %>退会
-  <% else %>
-    <%= f.radio_button :is_deleted, false, class: "text-success" %>有効　<%= f.radio_button :is_deleted, true, checked:true %>退会
-  <% end %>
-
-  <div class="col text-center">
-    <%= f.submit "　変更を保存　",class:"btn btn-success center-block"  %>
+<div class="container-fluid background_beige py-3">
+  <div class="row">
+    <div class="mx-auto">
+      <%= render "topbar",user: @user %>
+    </div>
   </div>
-<% end %>
+</div>
+
+<div class="container-fluid py-2">
+  <div class="row mt-4">
+
+    <div class="col-8 offset-md-2">
+      <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
+        <div class="row">
+          <div class="offset-sm-2 col-sm-8">
+            <div class="form-group">
+              <div class="card text-center m-1 shadow">
+              <%= f.file_field :profile_image, accept: "image/jpg, image/jpeg, image/png", class:"img_field",  style: 'display:none;' %>
+              <%= image_tag @user.profile_image, fallback: 'no_image.jpeg', onClick: "$('.img_field').click()", class: "center-block img-thumbnail img-responsive img_prev mx-auto d-block" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <table class="table table-borderless text-right shadow p-3 rounded">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 30%"></th>
+              <th scope="col" style="width: 70%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <p>メールアドレス</p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.email_field :email, class: "form-control", required: true %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ユーザ名</p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.text_field :username, class: "form-control", required: true %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ハンドルネーム</p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.text_field :handlename, class: "form-control", required: true %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>紹介文</p>
+              </td>
+              <td>
+                <div class="form-group">
+                  <%= f.text_area :introduction, class: "form-control" %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>退会フラグ</td>
+              <td>
+                <div class="text-center h5">
+                  <% if @user.is_deleted == false %>
+                    <label><%= f.radio_button :is_deleted, false, checked:true, class:"mx-auto" %>有効</label>　<label><%= f.radio_button :is_deleted, true, class: "mx-auto" %>退会</label>
+                  <% else %>
+                    <label><%= f.radio_button :is_deleted, false, class: "mx-auto" %>有効</label>　<label><%= f.radio_button :is_deleted, true, checked:true, class: "mx-auto" %>退会</label>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="col text-center">
+          <%= f.submit "　変更を保存　",class:"btn btn-secondary center-block mb-4 shadow"  %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
