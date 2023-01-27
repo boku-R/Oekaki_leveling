@@ -5,7 +5,7 @@
       <!--イラストをIDが大きい方から見ていき、画像が投稿されていたらそれを表示-->
       <% illust =  post.illusts.order(id: :desc).select{|o|o.illust_image.attached?}.first %>
       <%= link_to admin_post_path(post) do %>
-        <% if illust %>
+        <% if illust.illust_image.blob %>
           <%= image_tag illust.illust_image.variant(gravity: :center, resize:"200x200^", crop:"200x200+0+0").processed %>
         <% else %>
           <%= image_tag 'no_pictureimage.png',size:"200x200" %>
