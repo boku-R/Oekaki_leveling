@@ -8,11 +8,11 @@
 
 <div class="container-fluid py-2">
   <div class="row mt-4">
-    <%= flash[:notice] %>
     <div class="col-2">
       <%= render "public/users/sidebar",user: current_user %>
     </div>
       <div class="col-7 offset-md-1">
+      <%= flash[:notice] %>
       <%= render "post", title: "新規投稿", post: @post, illust_step: @illust_step, tag_list: "" %>
     </div>
   </div>
