@@ -17,7 +17,7 @@ class Public::PostsController < ApplicationController
 
   def index
     # 論理削除された投稿を除外
-    @posts = Post.where(is_deleted: false).page(params[:page])
+    @posts = Post.order(id: :desc).where(is_deleted: false).page(params[:page])
     @tag_list = Tag.using_tags
   end
 
