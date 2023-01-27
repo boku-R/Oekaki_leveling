@@ -5,6 +5,11 @@ class Admin::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page])
+
+    @draft_favorite_count = favorites_count(@user,"draft")
+    @linedraw_favorite_count = favorites_count(@user,"linedraw")
+    @color_favorite_count = favorites_count(@user,"color")
+    @finish_favorite_count = favorites_count(@user,"finish")
   end
 
   def index
@@ -38,6 +43,15 @@ class Admin::UsersController < ApplicationController
   # Userのストロングパラメータ
   def user_params
     params.require(:user).permit(:email, :is_deleted, :username, :handlename, :introduction, :profile_image, :password)
+  end
+
+  # 特定の段階のイラストに対するいいねの数を計算する
+  def favorites_count(user,step)
+    count = 0
+    user.posts.each do |f|
+      count += f.illusts.find_by(step: step).favorites.count
+    end
+    return count
   end
 
 end
