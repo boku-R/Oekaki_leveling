@@ -1,26 +1,8 @@
-<h2>管理者投稿一覧です</h2>
-
-<%= flash[:notice] %>
-
-<% @tag_list.each do |tag| %>
-  <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
-  <%="(#{tag.posts.where(is_deleted: false).count})(#{tag.posts.where(is_deleted: true).count})" %>
-<% end %>
-
-<% @posts.each do |post| %>
-  <!--完成から順にイラスト画像を探し、画像を見つけたらそれをピックアップ、探すのをやめる-->
-  <% post.illusts.reverse_each do |illust| %>
-    <% if illust.illust_image.present? %>
-      <%= link_to admin_post_path(illust.post_id) do %>
-        <!--リサイズ→真ん中を正方形にくり抜きます-->
-        <p><%= image_tag illust.illust_image.variant(resize: "100x100").processed %></p>
-      <% end %>
-      <!--イラストの画像を探すeach文から抜ける-->
-      <% break %>
-    <% end %>
-  <% end %>
-  <i class="fas fa-tags"></i><%= post.tags.map(&:name).join(',') %>
-  <span><%= post.title %></span>
-<% end %>
-
-<%= paginate @posts %>
+<div class="container-fluid py-2">
+  <div class="row mt-4">
+    <div class="col-8 offset-md-2">
+      <%= flash[:notice] %>
+      <%= render "index",title: "投稿一覧",posts: @posts %>
+    </div>
+  </div>
+</div>
