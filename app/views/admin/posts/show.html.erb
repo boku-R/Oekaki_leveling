@@ -8,9 +8,15 @@
 
 
 <div class="container-fluid py-2">
+  <%= flash[:notice] %>
   <div class="row mt-4">
     <div class="col-8 offset-md-2">
       <div class="h2 pb-2"><%= @post.title %></div>
+      <% if @post.is_deleted == false %>
+        <div class="text-success">有効</div>
+      <% else %>
+        <div class="text-danger">削除済み</div>
+      <% end %>
       <div class="h5 pb-2"><%= @post.introduction %></div>
 
       <i class="fas fa-tags"></i>
