@@ -89,6 +89,22 @@ PostTag.create!(post_id: post.id, tag_id: tag.id)
 tag = Tag.create!(name: "天の川")
 PostTag.create!(post_id: post.id, tag_id: tag.id)
 
+post = Post.create!(user_id: 4, title: "りんご", introduction: "5分で描きました")
+illust = Illust.create!(post_id: post.id, step: "draft")
+illust.illust_image.attach(io: File.open(Rails.root.join("app/assets/images/Illust_images/apple01.jpg")), filename: 'apple01.jpg')
+illust = Illust.create!(post_id: post.id, step: "linedraw")
+illust.illust_image.attach(io: File.open(Rails.root.join("app/assets/images/Illust_images/apple02.jpg")), filename: 'apple02.jpg')
+illust = Illust.create!(post_id: post.id, step: "color")
+illust.illust_image.attach(io: File.open(Rails.root.join("app/assets/images/Illust_images/apple03.jpg")), filename: 'apple03.jpg')
+illust = Illust.create!(post_id: post.id, step: "finish")
+illust.illust_image.attach(io: File.open(Rails.root.join("app/assets/images/Illust_images/apple04.jpg")), filename: 'apple04.jpg')
+tag = Tag.create!(name: "りんご")
+PostTag.create!(post_id: post.id, tag_id: tag.id)
+tag = Tag.create!(name: "赤")
+PostTag.create!(post_id: post.id, tag_id: tag.id)
+tag = Tag.create!(name: "初投稿")
+PostTag.create!(post_id: post.id, tag_id: tag.id)
+
 
 Admin.create!(
  email: 'admin@admin.com',
