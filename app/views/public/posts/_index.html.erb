@@ -1,33 +1,37 @@
 <div class="h3"><%= title %></div>
 <div class="row">
-  <% posts.each do |post| %>
-    <div class="card text-center m-1 shadow">
-      <!--イラストをIDが大きい方から見ていき、画像が投稿されていたらそれを表示-->
-      <% illust =  post.illusts.order(id: :desc).select{|o|o.illust_image.attached?}.first %>
-      <%= link_to post_path(post) do %>
-        <% if illust %>
-          <%= image_tag illust.illust_image.variant(gravity: :center, resize:"200x200^", crop:"200x200+0+0").processed %>
-        <% else %>
-          <%= image_tag 'no_pictureimage.png',size:"200x200" %>
-        <% end %>
-      <% end %>
-      <%= link_to user_path(post.user) do %>
-        <p class="icon_front rounded-circle"><%= image_tag post.user.get_profile_image(100,100),class: "mr-3 rounded-circle d-block mx-auto" %></p>
-      <% end %>
-
-      <div class="card-body d-flex flex-column mt-5 pb-0">
+  <% if posts.present? %>
+    <% posts.each do |post| %>
+      <div class="card text-center m-1 shadow">
+        <!--イラストをIDが大きい方から見ていき、画像が投稿されていたらそれを表示-->
+        <% illust =  post.illusts.order(id: :desc).select{|o|o.illust_image.attached?}.first %>
         <%= link_to post_path(post) do %>
-          <span><%= post.title.truncate(11) %></span>
-        <% end %>
-        <div class="m-0">
-          <i class="fas fa-tags"></i>
-          <% post.tags.first(1).each do |tag| %>
-            <%= link_to tag.name.truncate(8), search_tag_path(tag_id: tag.id) %>
-            <%="(#{tag.posts.where(is_deleted: false).count})" %>
+          <% if illust %>
+            <%= image_tag illust.illust_image.variant(gravity: :center, resize:"200x200^", crop:"200x200+0+0").processed %>
+          <% else %>
+            <%= image_tag 'no_pictureimage.png',size:"200x200" %>
           <% end %>
+        <% end %>
+        <%= link_to user_path(post.user) do %>
+          <p class="icon_front rounded-circle"><%= image_tag post.user.get_profile_image(100,100),class: "mr-3 rounded-circle d-block mx-auto" %></p>
+        <% end %>
+
+        <div class="card-body d-flex flex-column mt-5 pb-0">
+          <%= link_to post_path(post) do %>
+            <span><%= post.title.truncate(11) %></span>
+          <% end %>
+          <div class="m-0">
+            <i class="fas fa-tags"></i>
+            <% post.tags.first(1).each do |tag| %>
+              <%= link_to tag.name.truncate(8), search_tag_path(tag_id: tag.id) %>
+              <%="(#{tag.posts.where(is_deleted: false).count})" %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
+  <% else %>
+    <p>投稿はありません</p>
   <% end %>
 </div>
 
