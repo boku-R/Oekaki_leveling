@@ -33,8 +33,7 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_user_path(@user)
     else
       @user.profile_image.blob = User.find(params[:id]).profile_image.blob
-      flash[:notice] = "ユーザ情報を編集できませんでした"
-      redirect_to admin_user_path(@user)
+      render :edit
     end
   end
 

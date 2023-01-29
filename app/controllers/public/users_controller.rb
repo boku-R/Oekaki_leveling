@@ -23,11 +23,10 @@ class Public::UsersController < ApplicationController
     if @user.update(user_params)
       # フラッシュメッセージを設定
       flash[:notice] = "ユーザ情報は編集されました"
-      redirect_to user_path
+      redirect_to user_path(@user)
     else
       # ここでユーザアイコン画像を格納することでバリデーションエラーを収納
       @user.profile_image.blob = User.find(params[:id]).profile_image.blob
-      flash[:notice] = "ユーザ情報を編集できませんでした"
       render :edit
     end
   end

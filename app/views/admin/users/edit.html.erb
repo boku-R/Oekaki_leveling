@@ -10,6 +10,14 @@
   <div class="row mt-4">
 
     <div class="col-8 offset-md-2">
+      <% if @user.errors.any? %>
+        <p><%= @user.errors.count %>個のエラーが発生し、ユーザ情報を変更できませんでした:</p>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
       <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
         <div class="row">
           <div class="offset-sm-2 col-sm-8">
