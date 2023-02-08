@@ -1,0 +1,47 @@
+<table class="table table-borderless table-hover">
+  <thead>
+    <tr>
+      <th scope="col" style="width: 10%"></th>
+      <th scope="col" style="width: 20%"></th>
+      <th scope="col" style="width: 40%"></th>
+      <th scope="col" style="width: 30%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% post.post_comments.each do |post_comment| %>
+      <tr>
+        <% if post_comment.is_deleted == false %>
+          <td>
+            <%= link_to user_path(post_comment.user), method: :get do %>
+              <%= image_tag post_comment.user.get_profile_image(100,100),class: "mr-3 rounded-circle mx-auto" %>
+            <% end %>
+          </td>
+          <td class="align-middle">
+            <p class="h5"><%= post_comment.user.handlename %></p> @<%= post_comment.user.username %> <br><i class="fas fa-palette"></i> Lv.<%= post_comment.user.level %><br><%= post_comment.created_at.strftime('%Y/%m/%d') %>
+          </td>
+          <td class="align-middle">
+            <%= post_comment.comment %>
+          </td>
+
+          <% if post_comment.user == current_user %>
+            <td class="align-middle">
+              <%= link_to "コメント削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, class:"btn btn-danger" %>
+            </td>
+          <% end %>
+        <% else %>
+          <td></td>
+          <td></td>
+          <td class="align-middle">(コメントは削除されました)</td>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="form-group">
+  <%= form_with model: [post, post_comment], local: false do |f| %>
+    <%= f.text_area :comment, class: "form-control", placeholder: "コメント入力欄", required: true %>
+    <%= f.submit "送信する", class:"btn btn-secondary center-block mt-2 shadow" %>
+  <% end %>
+</div>
