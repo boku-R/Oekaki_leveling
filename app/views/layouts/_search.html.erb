@@ -3,7 +3,7 @@
     <%= form_with url: search_path, local: true, method: :get do |f| %>
       <div class="form-group d-flex flex-row">
         <%= f.text_field :word, class: "form-control" %>
-        <%= button_tag type: "submit", class: "btn btn-secondary" do %>
+        <%= button_tag type: "submit", class: "btn btn-outline-secondary" do %>
           <i class="fas fa-search"></i>
         <% end %>
       </div>
@@ -14,7 +14,7 @@
     <%= form_with url: admin_search_path, local: true, method: :get do |f| %>
       <div class="form-group d-flex flex-row">
         <%= f.text_field :word, class: "form-control" %>
-        <%= button_tag type: "submit", class: "btn btn-secondary" do %>
+        <%= button_tag type: "submit", class: "btn btn-outline-secondary" do %>
           <i class="fas fa-search"></i>
         <% end %>
       </div>
