@@ -1,20 +1,22 @@
 <% if user_signed_in? %>
   <div class="search_form">
     <%= form_with url: search_path, local: true, method: :get do |f| %>
-      <div class="form-group">
+      <div class="form-group d-flex flex-row">
         <%= f.text_field :word, class: "form-control" %>
-        <%= f.select :range, options_for_select([['ユーザを検索する'], ['投稿を検索する'], ['タグを検索する']]), class: "form-control" %>
-        <%= f.submit "検索", class: "btn btn-secondary" %>
+        <%= button_tag type: "submit", class: "btn btn-secondary" do %>
+          <i class="fas fa-search"></i>
+        <% end %>
       </div>
     <% end %>
   </div>
 <% elsif admin_signed_in? %>
   <div class="search_form">
     <%= form_with url: admin_search_path, local: true, method: :get do |f| %>
-      <div class="form-group">
-        <%= f.text_field :word %>
-        <%= f.select :range, options_for_select([['ユーザを検索する'], ['投稿を検索する'], ['タグを検索する']]) %>
-        <%= f.submit "検索", class: "btn btn-secondary" %>
+      <div class="form-group d-flex flex-row">
+        <%= f.text_field :word, class: "form-control" %>
+        <%= button_tag type: "submit", class: "btn btn-secondary" do %>
+          <i class="fas fa-search"></i>
+        <% end %>
       </div>
     <% end %>
   </div>

@@ -6,7 +6,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.where(is_deleted: false).find(params[:id])
-    @posts = @user.posts.where(is_deleted: false).page(params[:page])
+    @posts = @user.posts.where(is_deleted: false).page(params[:posts_page])
 
     @draft_favorite_count = favorites_count(@user,"draft")
     @linedraw_favorite_count = favorites_count(@user,"linedraw")
@@ -36,7 +36,7 @@ class Public::UsersController < ApplicationController
     # ユーザがいいねしたイラストのIDを「favorites」インスタンスに格納
     favorites = Favorite.where(user_id: @user.id).pluck(:illust_id)
     # 対応するPostが論理削除されていない、かつidが上記の「favorites」を探し出している
-    @favorite_illusts = Illust.joins(:post).where(id: favorites, posts: { is_deleted: false }).page(params[:page])
+    @favorite_illusts = Illust.joins(:post).where(id: favorites, posts: { is_deleted: false }).page(params[:posts_page])
   end
 
   def unsubscribe

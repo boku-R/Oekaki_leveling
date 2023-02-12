@@ -4,13 +4,9 @@ class Public::SearchesController < ApplicationController
   def search
     @range = params[:range]
 
-    if @range == "ユーザを検索する"
-      @users = User.where(is_deleted: false).looks(params[:word]).page(params[:page])
-    elsif @range == "投稿を検索する"
-      @posts = Post.where(is_deleted: false).looks(params[:word]).page(params[:page])
-    elsif @range == "タグを検索する"
-      @tags = Tag.using_tags.looks(params[:word]).page(params[:page]).per(20)
-    end
+    @users = User.order(created_at: :desc).where(is_deleted: false).looks(params[:word]).page(params[:users_page])
+    @posts = Post.order(created_at: :desc).where(is_deleted: false).looks(params[:word]).page(params[:posts_page])
+    @tags = Tag.order(created_at: :desc).using_tags.looks(params[:word]).page(params[:tags_page]).per(20)
   end
 
 end

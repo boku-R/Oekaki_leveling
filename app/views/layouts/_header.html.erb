@@ -1,129 +1,133 @@
 <!-- ナビゲーションバー -->
-<nav class="navbar navbar-expand-md navbar-light sticky-top background_yellow">
-  <%= link_to root_path, method: :get do %>
-    <%= image_tag image_url('Oekaki_icon.png'), size: "60x60", class:"rounded-circle shadow navbar-brand p-0" %>
-  <% end %>
+
+    <nav class="navbar navbar-expand-md navbar-light sticky-top background_yellow">
+        <%= link_to root_path, method: :get do %>
+          <%= image_tag image_url('Oekaki_icon.png'), size: "60x60", class:"rounded-circle shadow navbar-brand p-0" %>
+        <% end %>
 
 
-  <!--ユーザがサインインした場合-->
-  <% if user_signed_in? %>
-    <div class="d-flex justify-content-end">
-      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars h2"></i>
-      </button>
 
-      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarsearchContent" aria-controls="navbarsearchContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-search h2"></i>
-      </button>
-    </div>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-      <ul class="navbar-nav d-flex flex-row align-items-center d-flex justify-content-end">
-        <li class="nav-item pr-2">
-          <%= link_to user_path(current_user), method: :get do %>
-            <%= image_tag current_user.get_profile_image(41,41), class: "mr-3 rounded-circle d-block mx-auto shadow" %>
-          <% end %>
-          <%= link_to "マイページ", user_path(current_user), method: :get, class: "nav-link small-text pt-0" %>
-        </li>
-        <li class="nav-item pr-2">
-          <%= link_to new_post_path, method: :get do %>
-            <i class="fas fa-upload d-block mx-auto h2"></i>
-          <% end %>
-          <%= link_to "作品投稿", new_post_path, method: :get, class: "nav-link small-text pt-0" %>
-        </li>
-        <li class="nav-item pr-2">
-          <%= link_to posts_path, method: :get do %>
-            <i class="fas fa-images d-block mx-auto h2"></i>
-          <% end %>
-          <%= link_to "作品一覧", posts_path, method: :get, class: "nav-link small-text pt-0" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to destroy_user_session_path, method: :delete do %>
-            <i class="fas fa-sign-out-alt d-block mx-auto h2"></i>
-          <% end %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link small-text pt-0" %>
-        </li>
-      </ul>
-    </div>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarsearchContent">
-      <ul class="navbar-nav d-flex flex-row align-items-center d-flex justify-content-end">
-        <li class="nav-item pr-2 form-inline mx-auto">
-          <%= render "layouts/search" %>
-        </li>
-      </ul>
-    </div>
-  <!--＜管理者がログインした場合＞-->
-  <% elsif admin_signed_in? %>
-    <div class="d-flex justify-content-end">
-      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars h2"></i>
-      </button>
+      <!--ユーザがサインインした場合-->
+      <% if user_signed_in? %>
+          <div class="d-flex justify-content-end">
+            <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fas fa-bars h2"></i>
+            </button>
 
-      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarsearchContent" aria-controls="navbarsearchContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-search h2"></i>
-      </button>
-    </div>
+            <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarsearchContent" aria-controls="navbarsearchContent" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fas fa-search h2"></i>
+            </button>
+          </div>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-      <ul class="navbar-nav d-flex flex-row align-items-center justify-content-end">
-        <li class="nav-item pr-2">
-          <%= link_to admin_users_path do %>
-            <i class="fas fa-users d-block mx-auto h2"></i>
-          <% end %>
-          <%= link_to "ユーザ一覧", admin_users_path, method: :get, class: "nav-link small-text pt-0" %>
-        </li>
-        <li class="nav-item pr-2">
-          <%= link_to admin_posts_path do %>
-            <i class="fas fa-images d-block mx-auto h2"></i>
-          <% end %>
-          <%= link_to "作品一覧", admin_posts_path, method: :get, class: "nav-link small-text pt-0" %>
-        </li>
-        <li class="nav-item pr-2">
-          <%= link_to destroy_admin_session_path, method: :delete do %>
-            <i class="fas fa-sign-out-alt d-block mx-auto h2"></i>
-          <% end %>
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link small-text pt-0" %>
-        </li>
-      </ul>
-    </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav d-flex flex-row justify-content-end">
+            <li class="nav-item pr-2">
+              <%= link_to user_path(current_user), method: :get do %>
+                <%= image_tag current_user.get_profile_image(41,41), class: "mr-3 rounded-circle d-block mx-auto shadow" %>
+              <% end %>
+              <%= link_to "マイページ", user_path(current_user), method: :get, class: "nav-link small-text pt-0" %>
+            </li>
+            <li class="nav-item pr-2">
+              <%= link_to new_post_path, method: :get do %>
+                <i class="fas fa-upload d-block mx-auto h2"></i>
+              <% end %>
+              <%= link_to "作品投稿", new_post_path, method: :get, class: "nav-link small-text pt-0" %>
+            </li>
+            <li class="nav-item pr-2">
+              <%= link_to posts_path, method: :get do %>
+                <i class="fas fa-images d-block mx-auto h2"></i>
+              <% end %>
+              <%= link_to "作品一覧", posts_path, method: :get, class: "nav-link small-text pt-0" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                <i class="fas fa-sign-out-alt d-block mx-auto h2"></i>
+              <% end %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link small-text pt-0" %>
+            </li>
+          </ul>
+        </div>
 
-    <div class="collapse navbar-collapse" id="navbarsearchContent">
-      <ul class="navbar-nav d-flex flex-row align-items-center justify-content-end">
-        <li class="nav-item pr-2 form-inline mx-auto">
-          <%= render "layouts/search" %>
-        </li>
-      </ul>
-    </div>
-  <!--＜サインインしていない場合＞-->
-  <% else %>
-    <div class="d-flex justify-content-end">
-      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars h2"></i>
-      </button>
-    </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsearchContent">
+          <ul class="navbar-nav d-flex flex-row justify-content-end">
+            <li class="nav-item pr-2 form-inline">
+              <%= render "layouts/search" %>
+            </li>
+          </ul>
+        </div>
+      <!--＜管理者がログインした場合＞-->
+      <% elsif admin_signed_in? %>
+        <div class="d-flex justify-content-end">
+          <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars h2"></i>
+          </button>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-      <ul class="navbar-nav d-flex flex-row align-items-center justify-content-end">
-        <li class="nav-item pr-2">
-          <%= link_to about_path do %>
-            <i class="fas fa-question d-block mx-auto h2"></i>
-          <% end %>
-          <%= link_to "About", about_path, class: "nav-link small-text pt-0"  %>
-        </li>
-        <li class="nav-item pr-2">
-          <%= link_to new_user_registration_path do %>
-            <i class="fas fa-user-plus d-block mx-auto h2"></i>
-          <% end %>
-          <%= link_to "新規登録", new_user_registration_path, class: "nav-link small-text pt-0" %>
-        </li>
-        <li class="nav-item pr-2">
-          <%= link_to user_session_path do %>
-            <i class="fas fa-sign-in-alt d-block mx-auto h2"></i>
-          <% end %>
-          <%= link_to "ログイン", user_session_path, class: "nav-link small-text pt-0" %>
-        </li>
-      </ul>
-    </div>
-  <% end %>
-</nav>
+          <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarsearchContent" aria-controls="navbarsearchContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-search h2"></i>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav d-flex flex-row align-items-center justify-content-end">
+            <li class="nav-item pr-2">
+              <%= link_to admin_users_path do %>
+                <i class="fas fa-users d-block mx-auto h2"></i>
+              <% end %>
+              <%= link_to "ユーザ一覧", admin_users_path, method: :get, class: "nav-link small-text pt-0" %>
+            </li>
+            <li class="nav-item pr-2">
+              <%= link_to admin_posts_path do %>
+                <i class="fas fa-images d-block mx-auto h2"></i>
+              <% end %>
+              <%= link_to "作品一覧", admin_posts_path, method: :get, class: "nav-link small-text pt-0" %>
+            </li>
+            <li class="nav-item pr-2">
+              <%= link_to destroy_admin_session_path, method: :delete do %>
+                <i class="fas fa-sign-out-alt d-block mx-auto h2"></i>
+              <% end %>
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link small-text pt-0" %>
+            </li>
+          </ul>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarsearchContent">
+          <ul class="navbar-nav d-flex flex-row align-items-center justify-content-end">
+            <li class="nav-item pr-2 form-inline mx-auto">
+              <%= render "layouts/search" %>
+            </li>
+          </ul>
+        </div>
+      <!--＜サインインしていない場合＞-->
+      <% else %>
+        <div class="d-flex justify-content-end">
+          <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars h2"></i>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav d-flex flex-row align-items-center justify-content-end">
+            <li class="nav-item pr-2">
+              <%= link_to about_path do %>
+                <i class="fas fa-question d-block mx-auto h2"></i>
+              <% end %>
+              <%= link_to "About", about_path, class: "nav-link small-text pt-0"  %>
+            </li>
+            <li class="nav-item pr-2">
+              <%= link_to new_user_registration_path do %>
+                <i class="fas fa-user-plus d-block mx-auto h2"></i>
+              <% end %>
+              <%= link_to "新規登録", new_user_registration_path, class: "nav-link small-text pt-0" %>
+            </li>
+            <li class="nav-item pr-2">
+              <%= link_to user_session_path do %>
+                <i class="fas fa-sign-in-alt d-block mx-auto h2"></i>
+              <% end %>
+              <%= link_to "ログイン", user_session_path, class: "nav-link small-text pt-0" %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
+    </nav>

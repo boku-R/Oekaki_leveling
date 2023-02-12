@@ -17,7 +17,7 @@ class Public::PostsController < ApplicationController
 
   def index
     # 論理削除された投稿を除外
-    @posts = Post.order(id: :desc).where(is_deleted: false).page(params[:page])
+    @posts = Post.order(created_at: :desc).where(is_deleted: false).page(params[:posts_page])
     @tag_list = Tag.using_tags
   end
 
@@ -75,11 +75,11 @@ class Public::PostsController < ApplicationController
   # タグ検索
   def search_tag
     # 検索結果画面でタグ一覧表示（投稿に紐づいていない、また紐づいた投稿が削除されたタグを除外し、新規に登録されたタグ15件まで表示）
-    @tag_list = Tag.using_tags.order(id: :desc).limit(15)
+    @tag_list = Tag.using_tags.order(created_at: :desc).limit(15)
     # リンクを押されたタグを受け取る
     @tag = Tag.find(params[:tag_id])
     # 検索されたタグに紐づく投稿を表示（削除済みの投稿を除く）
-    @posts = @tag.posts.where(is_deleted: false).page(params[:page])
+    @posts = @tag.posts.where(is_deleted: false).page(params[:posts_page])
   end
 
   private
