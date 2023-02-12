@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page])
+    @posts = @user.posts.page(params[:posts_page])
 
     @draft_favorite_count = favorites_count(@user,"draft")
     @linedraw_favorite_count = favorites_count(@user,"linedraw")
@@ -14,7 +14,7 @@ class Admin::UsersController < ApplicationController
 
   def index
     # 論理削除されたものを含む全ての投稿、使われていないタグもすべて表示
-    @users = User.all.page(params[:page])
+    @users = User.all.page(params[:users_page])
   end
 
   def edit

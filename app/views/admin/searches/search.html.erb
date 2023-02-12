@@ -1,14 +1,12 @@
 <div class="container-fluid py-2 background_lightbeige">
   <div class="row mt-4">
     <div class="col-8 offset-md-2">
-      <div class="h2">検索結果</div>
-      <% if @range == "ユーザを検索する" %>
-        <%= render "admin/users/index", users: @users %>
-      <% elsif @range == "投稿を検索する" %>
-        <%= render "admin/posts/index", title: "",posts: @posts %>
-      <% elsif @range == "タグを検索する" %>
-        <%= render "admin/posts/tag_lists", tags: @tags %>
-      <% end %>
+      <div class="h2">タグ検索結果</div>
+      <%= render "admin/posts/tag_lists", tags: @tags %>
+      <div class="h2 pt-5">投稿検索結果</div>
+      <%= render "admin/posts/index", title: "",posts: @posts %>
+      <div class="h2 pt-5">ユーザ検索結果</div>
+      <%= render "admin/users/index", users: @users %>
     </div>
   </div>
 </div>

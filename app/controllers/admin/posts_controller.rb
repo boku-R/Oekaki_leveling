@@ -3,7 +3,7 @@ class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @posts = Post.all.page(params[:page]).per(10)
+    @posts = Post.all.page(params[:posts_page]).per(10)
     @tag_list = Tag.all
   end
 
@@ -40,11 +40,11 @@ class Admin::PostsController < ApplicationController
   # タグ検索
   def search_tag
     # すべてのタグを格納
-    @tag_list = Tag.all.order(id: :desc).limit(15)
+    @tag_list = Tag.all.order(created_at: :desc).limit(15)
     # リンクを押されたタグを受け取る
     @tag = Tag.find(params[:tag_id])
     # 検索されたタグに紐づく投稿を表示
-    @posts = @tag.posts.page(params[:page])
+    @posts = @tag.posts.page(params[:posts_page])
   end
 
   private
