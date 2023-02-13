@@ -1,6 +1,6 @@
-<div class="container-fluid background_beige py-3">
-  <div class="row">
-    <div class="col-6 offset-md-3 mx-auto">
+<div class="container-fluid">
+  <div class="row background_beige py-3">
+    <div class="col-md-6 offset-md-3 mx-auto">
 
     <%= image_tag image_url('Oekaki_icon.png'), size: "300x300", class:"rounded-circle shadow d-block mx-auto" %>
 
@@ -8,21 +8,17 @@
     <u><%= link_to "ここってどんなところ？", about_path, class: "nav-link text-center h5" %></u>
     </div>
   </div>
-</div>
 
 <%= flash[:notice] %>
 
-<div class="container-fluid">
   <div class="row shadow">
     <div class="col-8 offset-md-2 mx-auto py-5">
       <%= render "public/posts/index", title: "最近投稿されたイラスト",posts: @posts %>
     </div>
   </div>
-</div>
 
-<div class="container-fluid">
   <div class="row">
-    <div class="col-8 offset-md-2 mx-auto py-5">
+    <div class="col-md-8 offset-md-2 mx-auto py-5">
       <div class="h3">最近登録したユーザ</div>
       <%= render "public/users/index", users: @users %>
     </div>

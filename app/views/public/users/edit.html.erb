@@ -8,11 +8,11 @@
 
 <div class="container-fluid py-2">
   <div class="row mt-4">
-    <div class="col-2">
+    <div class="col-md-3">
       <%= render "sidebar",user: @user %>
     </div>
 
-    <div class="col-7 offset-md-1">
+    <div class="col-md-8">
       <% if @user.errors.any? %>
         <p><%= @user.errors.count %>個のエラーが発生し、ユーザ情報を変更できませんでした:</p>
         <ul>
@@ -33,57 +33,58 @@
             </div>
           </div>
         </div>
-
-        <table class="table table-borderless text-right shadow p-3 rounded">
-          <thead>
-            <tr>
-              <th scope="col" style="width: 30%"></th>
-              <th scope="col" style="width: 70%"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <p>メールアドレス</p>
-              </td>
-              <td>
-                <div class="form-group">
-                  <%= f.email_field :email, class: "form-control", required: true %>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>ユーザ名　※半角英数字のみ</p>
-              </td>
-              <td>
-                <div class="form-group">
-                  <%= f.text_field :username, class: "form-control", required: true %>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>ハンドルネーム　※全角も可</p>
-              </td>
-              <td>
-                <div class="form-group">
-                  <%= f.text_field :handlename, class: "form-control", required: true %>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>紹介文</p>
-              </td>
-              <td>
-                <div class="form-group">
-                  <%= f.text_area :introduction, class: "form-control" %>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive-md">
+          <table class="table table-borderless text-right shadow p-3 rounded">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 30%"></th>
+                <th scope="col" style="width: 70%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-nowrap">
+                  <p>メールアドレス</p>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <%= f.email_field :email, class: "form-control", required: true %>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-nowrap">
+                  <p>ユーザ名<br>※半角英数字のみ</p>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <%= f.text_field :username, class: "form-control", required: true %>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-nowrap">
+                  <p>ハンドルネーム<br>※全角も可</p>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <%= f.text_field :handlename, class: "form-control", required: true %>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-nowrap">
+                  <p>紹介文</p>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <%= f.text_area :introduction, class: "form-control" %>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <div class="col text-center">
           <%= f.submit "　変更を保存　",class:"btn btn-secondary center-block mb-4 shadow"  %>

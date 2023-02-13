@@ -1,9 +1,9 @@
 <div class="h3"><%= title %></div>
 
-<div class="row">
+<div class="row justify-content-center">
   <% if favorite_illusts.present? %>
     <% favorite_illusts.each do |illust|%>
-      <div class="card text-center m-1 shadow">
+      <div class="card text-center m-1 shadow" style="width: 202px;">
         <% if illust.post.is_deleted == false %>
           <%= link_to post_path(illust.post_id) do %>
             <p class="illust_back"><%= image_tag illust.illust_image.variant(gravity: :center, resize:"200x200^", crop:"200x200+0+0").processed %></p>

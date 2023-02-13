@@ -1,5 +1,5 @@
-  <div class="navbar-nav text-center background_purple shadow">
-    <%= link_to "プロフィール・投稿", user_path(user.id), method: :get, class: "nav-item nav-link" %>
+  <div class="navbar-nav text-center shadow">
+    <%= link_to "ユーザ情報", user_path(user.id), method: :get, class: "nav-item nav-link" %>
     <% if user.username != "guestuser" && user == current_user %>
       <%= link_to "プロフィール編集", edit_user_path(user.id), method: :get, class: "nav-item nav-link" %>
     <% end %>

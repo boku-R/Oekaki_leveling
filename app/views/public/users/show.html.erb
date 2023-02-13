@@ -17,17 +17,17 @@
     </ul>
   <% end %>
   <div class="row mt-4">
-    <div class="col-2">
+    <div class="col-md-3">
       <%= render "sidebar",user: @user %>
     </div>
 
-    <div class="col-9 offset-md-1">
+    <div class="col-md-9">
       <div class="row">
-        <div class="col-3 d-flex align-items-center d-block mx-auto">
-          <%= image_tag @user.get_profile_image(200,200),class: "mr-3 rounded-circle d-block mx-auto" %>
+        <div class="col-md-5 d-flex justify-content-center">
+          <%= image_tag @user.get_profile_image(200,200),class: "mr-3 rounded-circle" %>
         </div>
 
-        <div class="col-8">
+        <div class="col-md-7 d-block">
           <p class="h4"><%= @user.handlename %></p>
           <p>@<%= @user.username %></p>
           <% if @user == current_user %>
@@ -37,7 +37,11 @@
           <p>下書き<i class="fas fa-heart"></i><%= @draft_favorite_count %>    線画<i class="fas fa-heart"></i><%= @linedraw_favorite_count %>   色塗り<i class="fas fa-heart"></i><%= @color_favorite_count %>    完成<i class="fas fa-heart"></i><%= @finish_favorite_count %></p>
         </div>
       </div>
-      <%= render "public/posts/index",title: "投稿一覧", posts: @posts %>
+      <div class="row">
+        <div class="col mt-3">
+          <%= render "public/posts/index",title: "投稿一覧", posts: @posts %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
