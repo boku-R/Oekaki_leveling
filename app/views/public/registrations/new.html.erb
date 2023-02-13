@@ -1,6 +1,6 @@
 <div class="container-fluid py-3">
   <div class="row">
-    <div class="col-6 offset-md-3 mx-auto">
+    <div class="col-md-8 offset-md-2 mx-auto">
       <%= flash[:notice] %>
       <%= render "public/shared/error_messages", resource: resource %>
       <div class="h4"><i class="fas fa-user-plus"></i> 新規登録</div>
@@ -16,8 +16,8 @@
           </thead>
           <tbody>
             <tr>
-              <td class="align-middle">
-                <p>ユーザ名(半角英数字)</p>
+              <td class="align-middle text-nowrap">
+                <p>ユーザ名<br>(半角英数字)</p>
               </td>
               <td>
                 <div class="form-group">
@@ -26,8 +26,8 @@
               </td>
             </tr>
             <tr>
-              <td class="align-middle">
-                <p>ハンドル名(全角も可)</p>
+              <td class="align-middle text-nowrap">
+                <p>ハンドル名<br>(全角も可)</p>
               </td>
               <td>
                 <div class="form-group">
@@ -36,7 +36,7 @@
               </td>
             </tr>
             <tr>
-              <td class="align-middle">
+              <td class="align-middle text-nowrap">
                 <p>Eメール</p>
               </td>
               <td>
@@ -46,9 +46,9 @@
               </td>
             </tr>
             <tr>
-              <td class="align-middle">
+              <td class="align-middle text-nowrap">
                 <p>
-                  パスワード
+                  パスワード<br>
                   <% if @minimum_password_length %>
                   <%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %>
                   <% end %>
@@ -61,9 +61,9 @@
               </td>
             </tr>
             <tr>
-              <td class="align-middle">
+              <td class="align-middle text-nowrap">
                 <p>
-                  パスワード（確認用）
+                  パスワード<br>（確認用）
                 </p>
               </td>
               <td>
@@ -79,20 +79,20 @@
         </div>
       <% end %>
 
-      <p class="text-right pt-4">アカウントをお持ちの方は<%= link_to "こちら", user_session_path, class:"h5" %></p>
+      <p class="text-right pt-4">アカウントをお持ちの方は<%= link_to "こちら", user_session_path, class:"h5 border-bottom border-dark" %></p>
     </div>
   </div>
 </div>
 
 <div class="container-fluid py-4">
   <div class="row">
-    <div class="col-4 offset-md-4 shadow">
+    <div class="col-md-8 offset-md-2 shadow">
       <% if !current_user.present? && !current_admin.present? %>
         <table class="table table-borderless p-3 rounded">
           <tbody>
             <tr>
-              <p class="text-center pt-4 mb-1">登録が面倒ですか？気軽に触ってみましょう！</p>
-              <div class="p-0"><%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "btn btn-outline-secondary btn-sm btn-block", method: :post %></div>
+              <p class="text-center pt-4 mb-1">登録が面倒ですか？<br>気軽に触ってみましょう！</p>
+              <div class="p-0"><%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "btn btn-outline-secondary btn-block", method: :post %></div>
             </tr>
           </tbody>
         </table>

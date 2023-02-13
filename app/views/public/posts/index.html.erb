@@ -8,13 +8,13 @@
 
 <div class="container-fluid py-2">
   <div class="row mt-4">
-    <div class="col-2">
+    <div class="col-md-3 pb-4">
       <%= render "public/users/sidebar",user: current_user %>
     </div>
 
-    <div class="col-8 offset-md-1">
+    <div class="col-md-8">
       <%= flash[:notice] %>
-      <%= render "index",title: "最近投稿されたイラスト",posts: @posts %>
+      <%= render "index",title: "最近のイラスト",posts: @posts %>
     </div>
   </div>
 </div>
