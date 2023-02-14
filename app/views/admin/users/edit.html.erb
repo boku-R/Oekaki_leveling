@@ -9,7 +9,7 @@
 <div class="container-fluid py-2">
   <div class="row mt-4">
 
-    <div class="col-8 offset-md-2">
+    <div class="col-md-8 offset-md-2">
       <% if @user.errors.any? %>
         <p><%= @user.errors.count %>個のエラーが発生し、ユーザ情報を変更できませんでした:</p>
         <ul>
@@ -39,7 +39,7 @@
           </thead>
           <tbody>
             <tr>
-              <td>
+              <td class="text-nowrap">
                 <p>メールアドレス</p>
               </td>
               <td>
@@ -49,7 +49,7 @@
               </td>
             </tr>
             <tr>
-              <td>
+              <td class="text-nowrap">
                 <p>ユーザ名</p>
               </td>
               <td>
@@ -59,7 +59,7 @@
               </td>
             </tr>
             <tr>
-              <td>
+              <td class="text-nowrap">
                 <p>ハンドルネーム</p>
               </td>
               <td>
@@ -69,7 +69,7 @@
               </td>
             </tr>
             <tr>
-              <td>
+              <td class="text-nowrap">
                 <p>紹介文</p>
               </td>
               <td>

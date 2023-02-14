@@ -1,7 +1,7 @@
 <div class="h3"><%= title %></div>
-<div class="row">
+<div class="row justify-content-center">
   <% posts.each do |post| %>
-    <div class="card text-center m-1 shadow">
+    <div class="card text-center m-1 shadow" style="width: 202px;">
       <!--イラストをIDが大きい方から見ていき、画像が投稿されていたらそれを表示-->
       <% illust =  post.illusts.order(id: :desc).select{|o|o.illust_image.attached?}.first %>
       <%= link_to admin_post_path(post) do %>

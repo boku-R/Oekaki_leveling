@@ -16,7 +16,9 @@
       <div class="h2 pt-5">投稿検索結果</div>
       <%= render "public/posts/index",title: "",posts: @posts %>
       <div class="h2 pt-5">ユーザ検索結果</div>
-      <%= render "public/users/index",users: @users %>
+      <div class="overflow-auto">
+        <%= render "public/users/index",users: @users %>
+      </div>
     </div>
   </div>
 </div>

@@ -14,7 +14,10 @@
     </div>
     <div class="col-md-8">
       <div class="h2 pb-2"><%= @post.title %></div>
-      <div class="h5 pb-2"><%= @post.introduction %></div>
+      <div class="h5 pb-2">
+        <!--改行をviewにて適用させる-->
+        <%= safe_join("#{@post.introduction}".split("\n"),tag(:br)) %>
+      </div>
 
       <i class="fas fa-tags"></i>
       <% @post_tags.each do |tag| %>

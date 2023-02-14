@@ -3,7 +3,7 @@
 <%= form_with model: post, url: admin_post_path(post.id), method: :patch do |f| %>
   <div class="row mb-4">
     <%= f.fields_for :illusts do |i| %>
-      <div class="col-3">
+      <div class="col-md-3">
         <div class="form-group illust_image_group card text-center m-1 shadow">
           <div class="card-header p-1 h5"><%= I18n.t("enums.illust.step.#{Illust.steps.keys[illust_step]}") %></div>
           <%= i.file_field :illust_image, accept: "image/jpg, image/jpeg, image/png", class:"img_field_input",  style: 'display:none;', id: "img_field-#{i.index}" %>
@@ -29,7 +29,7 @@
     </thead>
     <tbody>
       <tr>
-        <td>
+        <td class="text-nowrap">
           <p>タイトル</p>
         </td>
         <td>
@@ -39,7 +39,7 @@
         </td>
       </tr>
       <tr>
-        <td>
+        <td class="text-nowrap">
           <p>説明</p>
         </td>
         <td>
@@ -49,18 +49,18 @@
         </td>
       </tr>
       <tr>
-        <td>
+        <td class="text-nowrap">
           <p>タグ</p>
         </td>
         <td>
           <div class="form-group">
             <%= f.text_field :name, value: tag_list, class: "form-control"%>
-            ※半角スペースで区切ると複数タグ登録できます
+            ※半角スペースで区切ると複数タグ登録可能
           </div>
         </td>
       </tr>
       <tr>
-        <td>
+        <td class="text-nowrap">
           <p>削除フラグ</p>
         </td>
         <td>
