@@ -39,7 +39,7 @@
 <!--トップページにいる時だけ無効化する-->
 <% if !current_page?(root_path) %>
   <div class="row d-flex flex-column align-items-center mt-3">
-    <ul class="pagination" href="javascript:void(0);" onclick="ScrollWindow(posts_title_section);" >
+    <ul class="pagination" href="javascript:void(0);" onclick="ScrollWindowPosts(posts_title_section);" >
       <%= paginate posts, param_name: 'posts_page', theme: 'twitter-bootstrap-4', remote: true %>
     </ul>
   </div>
@@ -47,7 +47,7 @@
 
 <!--// ページネーションにおける、上部位置へスクロールするためのメソッド-->
 <script>
-  function ScrollWindow(elem) {
+  function ScrollWindowPosts(elem) {
     const element = document.getElementById('posts_title_section');
     const targetDOMRect = element.getBoundingClientRect();
     const targetTop = targetDOMRect.top + window.pageYOffset;
