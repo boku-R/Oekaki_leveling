@@ -1,21 +1,21 @@
 <!-- ナビゲーションバー -->
 
 <nav class="navbar navbar-expand-md navbar-light sticky-top background_yellow">
-    <%= link_to root_path, method: :get do %>
-      <%= image_tag image_url('Oekaki_icon.png'), size: "60x60", class:"rounded-circle shadow navbar-brand p-0" %>
-    <% end %>
+  <%= link_to root_path, method: :get do %>
+    <%= image_tag image_url('Oekaki_icon.png'), size: "60x60", class:"rounded-circle shadow navbar-brand p-0" %>
+  <% end %>
 
   <!--ユーザがサインインした場合-->
   <% if user_signed_in? %>
-      <div class="d-flex justify-content-end">
-        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars h2 m-0"></i>
-        </button>
+    <div class="d-flex justify-content-end">
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars h2 m-0"></i>
+      </button>
 
-        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarsearchContent" aria-controls="navbarsearchContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-search h2 m-0"></i>
-        </button>
-      </div>
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarsearchContent" aria-controls="navbarsearchContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-search h2 m-0"></i>
+      </button>
+    </div>
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav d-flex flex-row justify-content-end">
