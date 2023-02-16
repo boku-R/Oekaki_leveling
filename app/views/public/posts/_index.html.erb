@@ -1,4 +1,4 @@
-<div class="h3" id="title_section"><%= title %></div>
+<div class="h3" id="posts_title_section"><%= title %></div>
 <div class="row justify-content-center">
   <% if posts.present? %>
 
@@ -16,7 +16,6 @@
         <%= link_to user_path(post.user) do %>
           <p class="icon_front rounded-circle"><%= image_tag post.user.get_profile_image(100,100),class: "mr-3 rounded-circle d-block mx-auto" %></p>
         <% end %>
-
 
         <div class="card-body d-flex flex-column mt-5 pb-0">
           <%= link_to post_path(post) do %>
@@ -40,9 +39,20 @@
 <!--トップページにいる時だけ無効化する-->
 <% if !current_page?(root_path) %>
   <div class="row d-flex flex-column align-items-center mt-3">
-    <ul class="pagination">
+    <ul class="pagination" href="javascript:void(0);" onclick="ScrollWindow(posts_title_section);" >
       <%= paginate posts, param_name: 'posts_page', theme: 'twitter-bootstrap-4', remote: true %>
     </ul>
   </div>
 <% end %>
 
+<!--// ページネーションにおける、上部位置へスクロールするためのメソッド-->
+<script>
+  function ScrollWindow(elem) {
+    const element = document.getElementById('posts_title_section');
+    const targetDOMRect = element.getBoundingClientRect();
+    const targetTop = targetDOMRect.top + window.pageYOffset;
+    window.scrollTo({
+      top: targetTop
+    });
+  }
+</script>

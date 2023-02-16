@@ -13,11 +13,11 @@
     <div class="col-md-8">
       <div class="h2">タグ検索結果</div>
       <%= render "public/posts/tag_lists",tags: @tags %>
-      <div class="h2 pt-5">投稿検索結果</div>
-      <%= render "public/posts/index",title: "",posts: @posts %>
-      <div class="h2 pt-5">ユーザ検索結果</div>
-      <div class="overflow-auto">
-        <%= render "public/users/index",users: @users %>
+      <div id="pagenate_posts">
+        <%= render "public/posts/index",title: "投稿検索結果",posts: @posts %>
+      </div>
+      <div id="pagenate_users">
+        <%= render "public/users/index", users: @users, title: "ユーザ検索結果" %>
       </div>
     </div>
   </div>

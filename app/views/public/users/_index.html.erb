@@ -1,5 +1,6 @@
+<div class="h3" id="users_title_section"><%= title %></div>
 <% if users.exists? %>
-  <table class="table-responsive-md table-borderless table-hover">
+  <table class="table-responsive table-borderless table-hover">
     <thead class="">
       <tr>
         <th scope="col" style="width: 10%"></th>
@@ -22,10 +23,10 @@
             <%= safe_join("#{user.introduction}".split("\n"),tag(:br)) %>
           </td>
 
-          <td class="align-middle">
-          <div id="follow_btn_<%= user.id %>" class="text-nowrap">
-            <%= render "public/users/follow", user: user %>
-          </div>
+          <td class="align-middle text-center">
+            <div id="follow_btn_<%= user.id %>" class="text-nowrap">
+              <%= render "public/users/follow", user: user %>
+            </div>
           </td>
         </tr>
       <% end %>
@@ -38,8 +39,20 @@
 <!--トップページにいる時だけ無効化する-->
 <% if !current_page?(root_path) %>
   <div class="row d-flex flex-column align-items-center mt-3">
-    <ul class="pagination">
+    <ul class="pagination" href="javascript:void(0);" onclick="ScrollWindow(users_title_section);">
       <%= paginate users, remote: true,  param_name: 'users_page', theme: 'twitter-bootstrap-4' %>
     </ul>
   </div>
 <% end %>
+
+<!--// ページネーションにおける、上部位置へスクロールするためのメソッド-->
+<script>
+  function ScrollWindow(elem) {
+  const element = document.getElementById('users_title_section');
+  const targetDOMRect = element.getBoundingClientRect();
+  const targetTop = targetDOMRect.top + window.pageYOffset;
+  window.scrollTo({
+    top: targetTop
+  });
+}
+</script>

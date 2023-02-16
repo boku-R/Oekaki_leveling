@@ -1,4 +1,4 @@
-<div class="h3"><%= title %></div>
+<div class="h3" id="favorite_illusts_title_section"><%= title %></div>
 
 <div class="row justify-content-center">
   <% if favorite_illusts.present? %>
@@ -32,7 +32,19 @@
   <% end %>
 </div>
 <div class="row d-flex flex-column align-items-center mt-3">
-  <ul class="pagination">
-    <%= paginate favorite_illusts, theme: 'twitter-bootstrap-4' %>
+  <ul class="pagination" href="javascript:void(0);" onclick="ScrollWindow(favorite_illusts_title_section);">
+    <%= paginate favorite_illusts,param_name: 'posts_page', theme: 'twitter-bootstrap-4', remote: true %>
   </ul>
 </div>
+
+<!--// ページネーションにおける、上部位置へスクロールするためのメソッド-->
+<script>
+  function ScrollWindow(elem) {
+  const element = document.getElementById('favorite_illusts_title_section');
+  const targetDOMRect = element.getBoundingClientRect();
+  const targetTop = targetDOMRect.top + window.pageYOffset;
+  window.scrollTo({
+    top: targetTop
+  });
+}
+</script>

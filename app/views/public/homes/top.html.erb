@@ -18,9 +18,8 @@
   </div>
 
   <div class="row">
-    <div class="col-md-8 offset-md-2 mx-auto py-5">
-      <div class="h3">最近登録したユーザ</div>
-      <%= render "public/users/index", users: @users %>
+    <div class="col mx-auto py-5">
+      <%= render "public/users/index", users: @users, title: "最近登録したユーザ" %>
     </div>
   </div>
 </div>

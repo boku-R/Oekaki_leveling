@@ -1,2 +1,1 @@
-<!--$('#pagenate').html("<%#= escape_javascript(render 'public/posts/index') %>");-->
 $('#pagenate_posts').html("<%= j(render partial: 'public/posts/index', locals: {posts: @posts, title: "最近のイラスト"} ) %>");

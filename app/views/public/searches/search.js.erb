@@ -1,0 +1,2 @@
+$('#pagenate_posts').html("<%= j(render partial: 'public/posts/index', locals: {posts: @posts, title: "投稿検索結果"} ) %>");
+$('#pagenate_users').html("<%= j(render partial: 'public/users/index', locals: {users: @users, title: "投稿検索結果"} ) %>");
