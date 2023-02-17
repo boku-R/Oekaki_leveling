@@ -12,13 +12,13 @@
 <%= flash[:notice] %>
 
   <div class="row shadow">
-    <div class="col-md-8 offset-md-2 mx-auto py-5">
+    <div class="col-md-8 offset-md-2 py-5">
       <%= render "public/posts/index", title: "最近投稿されたイラスト",posts: @posts %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-8 offset-md-2 mx-auto py-5">
+    <div class="col-md-8 offset-md-2 py-5">
       <%= render "public/users/index", users: @users, title: "最近登録したユーザ" %>
     </div>
   </div>
