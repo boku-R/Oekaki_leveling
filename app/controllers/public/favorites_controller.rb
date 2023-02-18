@@ -11,8 +11,6 @@ class Public::FavoritesController < ApplicationController
     user = @post.user
     level = get_level(user)
     user.update(level: level)
-
-    # redirect_to post_path(post)
   end
 
   def destroy
@@ -26,8 +24,6 @@ class Public::FavoritesController < ApplicationController
     user = @post.user
     level = get_level(user)
     user.update(level: level)
-
-    # redirect_to post_path(post)
   end
 
   private
