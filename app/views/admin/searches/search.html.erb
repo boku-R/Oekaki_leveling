@@ -1,12 +1,9 @@
 <div class="container-fluid py-2 background_lightbeige">
   <div class="row mt-4">
     <div class="col-md-8 offset-md-2">
-      <div class="h2">タグ検索結果</div>
-      <%= render "admin/posts/tag_lists", tags: @tags %>
-      <div class="h2 pt-5">投稿検索結果</div>
-      <%= render "admin/posts/index", title: "",posts: @posts %>
-      <div class="h2 pt-5">ユーザ検索結果</div>
-      <%= render "admin/users/index", users: @users %>
+      <%= render "admin/posts/tag_lists",title: "タグ検索結果", tags: @tags %>
+      <%= render "admin/posts/index", title: "投稿検索結果",posts: @posts %>
+      <%= render "admin/users/index", title: "ユーザ検索結果", users: @users %>
     </div>
   </div>
 </div>

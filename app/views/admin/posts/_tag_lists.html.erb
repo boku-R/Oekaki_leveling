@@ -1,12 +1,17 @@
+<div class="h3"><%= title %></div>
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb shadow">
-    <% tags.each do |tag| %>
-      <li class="breadcrumb-item">
-        <i class="fas fa-tags"></i>
-        <%= link_to tag.name, admin_search_tag_path(tag_id: tag.id) %>
-        (<div class="text-success"><%="#{tag.posts.where(is_deleted: false).count}" %></div>)
-        (<div class="text-danger"><%= "#{tag.posts.where(is_deleted: true).count}" %></div>)
-      </li>
+  <ol class="breadcrumb shadow justify-content-center">
+    <% if tags.present? %>
+      <% tags.each do |tag| %>
+        <li class="breadcrumb-item">
+          <i class="fas fa-tags"></i>
+          <%= link_to tag.name, admin_search_tag_path(tag_id: tag.id) %>
+          (<div class="text-success"><%="#{tag.posts.where(is_deleted: false).count}" %></div>)
+          (<div class="text-danger"><%= "#{tag.posts.where(is_deleted: true).count}" %></div>)
+        </li>
+      <% end %>
+    <% else %>
+      <p>タグはありません</p>
     <% end %>
   </ol>
 </nav>
