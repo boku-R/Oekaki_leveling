@@ -11,8 +11,7 @@
       <%= render "public/users/sidebar",user: current_user %>
     </div>
     <div class="col-md-9">
-      <div class="h2">タグ検索結果</div>
-      <%= render "public/posts/tag_lists",tags: @tags %>
+      <%= render "public/posts/tag_lists",title: "タグ検索結果", tags: @tags %>
       <div id="pagenate_posts">
         <%= render "public/posts/index",title: "投稿検索結果",posts: @posts %>
       </div>

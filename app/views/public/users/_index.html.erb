@@ -39,7 +39,7 @@
 <!--トップページにいる時だけ無効化する-->
 <% if !current_page?(root_path) %>
   <div class="row d-flex flex-column align-items-center mt-3">
-    <ul class="pagination" href="javascript:void(0);" onclick="ScrollWindowUsers(users_title_section)">
+    <ul class="pagination" href="javascript:void(0);" onclick="ScrollWindowUsers()">
       <%= paginate users, remote: true,  param_name: 'users_page', theme: 'twitter-bootstrap-4' %>
     </ul>
   </div>

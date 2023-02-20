@@ -33,6 +33,7 @@
 
     <table class="table table-borderless table-hover">
       <tbody>
+        <!--それぞれの段階ごとのイラスト（全４枚）を表示。投稿のない段階については、no_pictureimage.pngを表示-->
         <% @post.illusts.each do |illust| %>
           <tr>
             <th>
@@ -58,6 +59,7 @@
       </tbody>
     </table>
 
+    <!--投稿に対するコメント-->
     <div id="comments_area">
       <%= render "public/post_comments/comment", post: @post, post_comment: @post_comment %>
     </div>

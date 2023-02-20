@@ -40,7 +40,7 @@
 <!--トップページにいる時だけ無効化する-->
 <% if !current_page?(root_path) %>
   <div class="row d-flex flex-column align-items-center mt-3">
-    <ul class="pagination" href="javascript:void(0);" onclick="ScrollWindowPosts(posts_title_section);" >
+    <ul class="pagination" href="javascript:void(0);" onclick="ScrollWindowPosts();" >
       <%= paginate posts, param_name: 'posts_page', theme: 'twitter-bootstrap-4', remote: true %>
     </ul>
   </div>
