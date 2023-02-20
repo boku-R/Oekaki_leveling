@@ -23,7 +23,9 @@
           <% end %>
         </ol>
       </nav>
-      <%= render "index",title: "",posts: @posts %>
+      <div id="pagenate_posts">
+        <%= render "index",title: "", posts: @posts %>
+      </div
     </div>
   </div>
 </div>

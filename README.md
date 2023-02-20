@@ -45,6 +45,8 @@
 
 - レベル機能（いいねの累計でレベルアップ）
 
+- ドメインの取得・https通信の実装
+
 ## 設計書
 - [こちら](https://drive.google.com/file/d/11i_MDkUhcNPyRs4PrNsxC3oig6hZ-f-2/view?usp=sharing)をご覧ください
 

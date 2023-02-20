@@ -1,3 +1,4 @@
+<!--いいねボタンの部分テンプレート-->
 <% if illust.favorited_by?(current_user) %>
   <p>
     <%= link_to post_favorites_path(post,illust_id: illust.id), method: :delete, remote: true do %>

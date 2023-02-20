@@ -1,7 +1,8 @@
+<!--投稿一覧の部分テンプレート-->
 <div class="h3" id="posts_title_section"><%= title %></div>
 <div class="row justify-content-center">
+  <!--投稿が存在すれば、完成に一番近いイラストを選びカードとして表示。投稿はあるが画像がない場合、no_pictureimage.pngを表示。-->
   <% if posts.present? %>
-
     <% posts.each do |post| %>
       <div class="card text-center m-1 shadow" style="width: 202px;">
         <!--イラストをIDが大きい方から見ていき、画像が投稿されていたらそれを表示-->
@@ -45,7 +46,7 @@
   </div>
 <% end %>
 
-<!--// ページネーションにおける、上部位置へスクロールするためのメソッド-->
+<!--ページネーションにおける、上部位置へスクロールするための記述-->
 <script>
   function ScrollWindowPosts(elem) {
     const element = document.getElementById('posts_title_section');

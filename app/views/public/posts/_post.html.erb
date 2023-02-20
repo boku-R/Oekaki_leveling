@@ -1,7 +1,9 @@
+<!--投稿の部分テンプレート。新規作成画面(new.hrml.erb)と編集画面(edit.html.erb)に利用-->
 <h2><%= title %></h2>
 
 <%= form_with model: post do |f| %>
   <div class="row mb-4">
+    <!--それぞれのイラスト段階に対して、投稿画像の選択の動的な処理を実行-->
     <%= f.fields_for :illusts do |i| %>
       <div class="col-md-3">
         <div class="form-group illust_image_group card text-center m-1 shadow">
@@ -13,7 +15,7 @@
             <%= image_tag 'no_pictureimage.png', class: "center-block img-thumbnail img-responsive img_prev mx-auto d-block", id: "img_prev-#{i.index}" %>
           <% end %>
         </div>
-        <!--上から順に、イラストの種類(illust.step)をhidden_fieldで投入。enumを導入しております-->
+        <!--上から順に、イラストの作成段階(illust.step)をhidden_fieldで投入。enumを導入。-->
         <%= i.hidden_field :step, value: Illust.steps.keys[illust_step] %>
         <% illust_step = illust_step + 1 %>
       </div>
@@ -91,7 +93,6 @@
     const formGroup = $target.parent()
     const targetId = $target.attr('id').replace("img_prev-", "")
     const eventTarget = $(`#img_field-${targetId}`)
-    console.log(eventTarget)
     eventTarget.click()
   })
 </script>
