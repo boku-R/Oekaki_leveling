@@ -1,40 +1,42 @@
 <div class="h3" id="users_title_section"><%= title %></div>
-<% if users.exists? %>
-  <table class="table-responsive table-borderless table-hover  mx-auto">
-    <thead class="">
-      <tr>
-        <th scope="col" style="width: 10%"></th>
-        <th scope="col" style="width: 20%"></th>
-        <th scope="col" style="width: 40%; min-width: 220px;"></th>
-        <th scope="col" style="width: 30%"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% users.each do |user| %>
+<div class="row justify-content-center">
+  <% if users.exists? %>
+    <table class="table-responsive table-borderless table-hover  mx-auto">
+      <thead class="">
         <tr>
-          <td>
-            <%= link_to user_path(user.id), method: :get do %>
-              <%= image_tag user.get_profile_image(100,100),class: "mr-3 rounded-circle mx-auto" %>
-            <% end %>
-          </td>
-          <td class="align-middle text-nowrap"><p class="h5"><%= user.handlename %></p> @<%= user.username %> <br><i class="fas fa-palette"></i> Lv.<%= user.level %></td>
-          <td class="align-middle">
-            <!--改行をviewにて適用させる-->
-            <%= safe_join("#{user.introduction}".split("\n"),tag(:br)) %>
-          </td>
-
-          <td class="align-middle text-center">
-            <div id="follow_btn_<%= user.id %>" class="text-nowrap">
-              <%= render "public/users/follow", user: user %>
-            </div>
-          </td>
+          <th scope="col" style="width: 10%"></th>
+          <th scope="col" style="width: 20%"></th>
+          <th scope="col" style="width: 40%; min-width: 220px;"></th>
+          <th scope="col" style="width: 30%"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>ユーザーはいません</p>
-<% end %>
+      </thead>
+      <tbody>
+        <% users.each do |user| %>
+          <tr>
+            <td>
+              <%= link_to user_path(user.id), method: :get do %>
+                <%= image_tag user.get_profile_image(100,100),class: "mr-3 rounded-circle mx-auto" %>
+              <% end %>
+            </td>
+            <td class="align-middle text-nowrap"><p class="h5"><%= user.handlename %></p> @<%= user.username %> <br><i class="fas fa-palette"></i> Lv.<%= user.level %></td>
+            <td class="align-middle">
+              <!--改行をviewにて適用させる-->
+              <%= safe_join("#{user.introduction}".split("\n"),tag(:br)) %>
+            </td>
+
+            <td class="align-middle text-center">
+              <div id="follow_btn_<%= user.id %>" class="text-nowrap">
+                <%= render "public/users/follow", user: user %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>ユーザーはいません</p>
+  <% end %>
+</div>
 
 <!--トップページにいる時だけ無効化する-->
 <% if !current_page?(root_path) %>
@@ -45,7 +47,7 @@
   </div>
 <% end %>
 
-<!--// ページネーションにおける、上部位置へスクロールするためのメソッド-->
+<!--// ページネーションにおける、上部位置へスクロールするための記述-->
 <script>
   function ScrollWindowUsers(elem) {
   const element = document.getElementById('users_title_section');

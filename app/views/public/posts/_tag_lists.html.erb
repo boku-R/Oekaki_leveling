@@ -1,6 +1,6 @@
 <div class="h3"><%= title %></div>
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb shadow ">
+  <ol class="breadcrumb shadow justify-content-center">
     <% if tags.present? %>
       <% tags.each do |tag| %>
         <li class="breadcrumb-item"><i class="fas fa-tags"></i><%= link_to tag.name, search_tag_path(tag_id: tag.id) %><%="(#{tag.posts.where(is_deleted: false).count})" %></li>

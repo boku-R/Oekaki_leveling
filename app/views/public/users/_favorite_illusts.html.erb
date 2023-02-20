@@ -32,12 +32,12 @@
   <% end %>
 </div>
 <div class="row d-flex flex-column align-items-center mt-3">
-  <ul class="pagination" href="javascript:void(0);" onclick="ScrollWindow(favorite_illusts_title_section);">
+  <ul class="pagination" href="javascript:void(0);" onclick="ScrollWindow();">
     <%= paginate favorite_illusts,param_name: 'posts_page', theme: 'twitter-bootstrap-4', remote: true %>
   </ul>
 </div>
 
-<!--// ページネーションにおける、上部位置へスクロールするためのメソッド-->
+<!--ページネーションにおける、上部位置へスクロールするための記述-->
 <script>
   function ScrollWindow(elem) {
   const element = document.getElementById('favorite_illusts_title_section');
