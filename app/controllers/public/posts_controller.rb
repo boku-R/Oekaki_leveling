@@ -2,6 +2,8 @@ class Public::PostsController < ApplicationController
   before_action :ensure_deleted_post, only: [:show, :edit]
   # ログインしていない状態のアクセスを制限する
   before_action :authenticate_user!
+  # 投稿者以外のアクセスを制御
+  before_action :ensure_post_user, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -86,6 +88,13 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title,:introduction,:user_id, :is_deleted, illusts_attributes: [:id, :post_id, :step, :illust_image])
+  end
+
+  # 投稿の編集は、投稿したユーザのみに限定
+  def ensure_post_user
+    unless Post.find(params[:id]).user == current_user
+      redirect_to post_path(params[:id])
+    end
   end
 
   # ログイン中のユーザと、ユーザページで表示しているユーザが異なるときの権限の設定
