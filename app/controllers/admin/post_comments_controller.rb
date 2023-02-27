@@ -4,7 +4,6 @@ class Admin::PostCommentsController < ApplicationController
     post_comment = PostComment.find(params[:id])
     post_comment.is_deleted = false
     post_comment.save
-    # redirect_to admin_post_path(params[:post_id])
     # jsファイルに渡すインスタンス
     @post = post_comment.post
   end
@@ -13,7 +12,6 @@ class Admin::PostCommentsController < ApplicationController
     post_comment = PostComment.find(params[:id])
     post_comment.is_deleted = true
     post_comment.save
-    # redirect_to admin_post_path(params[:post_id])
     # jsファイルに渡すインスタンス
     @post = post_comment.post
   end
