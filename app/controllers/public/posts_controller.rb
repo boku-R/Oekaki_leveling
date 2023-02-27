@@ -20,7 +20,6 @@ class Public::PostsController < ApplicationController
   def index
     # 論理削除された投稿を除外
     @posts = Post.order(created_at: :desc).where(is_deleted: false).page(params[:posts_page])
-    @tag_list = Tag.using_tags
   end
 
   def show
@@ -48,7 +47,6 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @user = User.find(@post.user_id)
     # illust.stepに投入するための変数をここで準備
     @illust_step = 0
     @tag_list = @post.tags.pluck(:name).join(' ')
